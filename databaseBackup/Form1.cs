@@ -42,6 +42,21 @@ namespace databaseBackup
             bD.Connection(Server, NameUser, Pass);
         }
         // Обработчик нажатия на кнопку Резервное копирование
+        public void checkCommand(int state)
+        {
+            switch (state)
+            {
+                case 0:
+                    MessageBox.Show("Резервное копирование завершено");
+                    break;
+                case 1:
+                    MessageBox.Show("Ошибка резервного копирования");
+                    break;
+                case 2:
+                    MessageBox.Show("Вы не подключены к Sql Server");
+                    break;
+            }
+        }
         private void buttonCopy_Click(object sender, EventArgs e)
         {
             // Считывание значения из textBox
@@ -55,19 +70,7 @@ namespace databaseBackup
                 // Присваивание переменной пути до файла
                 string Directory = folderDlg.SelectedPath;
                 // Обработчик исходов резервного копирования
-                int state = bD.Backups(NameBase, Directory);
-                switch (state)
-                {
-                    case 0:
-                        MessageBox.Show("Резервное копирование завершено");
-                        break;
-                    case 1:
-                        MessageBox.Show("Ошибка резервного копирования");
-                        break;
-                    case 2:
-                        MessageBox.Show("Вы не подключены к Sql Server");
-                        break;
-                }
+                checkCommand(bD.Backups(NameBase, Directory));
             }
 
         }
@@ -86,24 +89,10 @@ namespace databaseBackup
                 else
                 {
                     // Отработка метода восстановления базы данных и возвращения исхода
-                    int state = bD.Recovery(OPF.FileName, Path.GetFileNameWithoutExtension(OPF.FileName));
-                    switch (state)
-                    {
-                        case 0:
-                            MessageBox.Show("Восстановление завершено");
-                            break;
-                        case 1:
-                            MessageBox.Show("Ошибка восстановления");
-                            break;
-                        case 2:
-                            MessageBox.Show("Вы не подключены к Sql Server");
-                            break;
-                    }
+                    checkCommand(bD.Recovery(OPF.FileName,textBoxNameBase.Text));
                 }
             }
         }
-
-
 
         private void buttonSaveInterval_Click(object sender, EventArgs e)
         {
@@ -118,7 +107,6 @@ namespace databaseBackup
             TimeSpan interval = DateTime.Now.Subtract(DateTime.Parse(ParametersInterval[1]));
             switch (int.Parse(ParametersInterval[0]))
             {
-
                 case 0:
                     if (interval >= TimeSpan.FromHours(1))
                     {

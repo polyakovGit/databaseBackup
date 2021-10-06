@@ -36,10 +36,11 @@ namespace databaseBackup
         public int Backups(string NameBase, string Directory)
         {
             //Создание строки
-            string path= string.Format("{0}\\{1}_{2}.bak",Directory ,NameBase, DateTime.Now.ToString("dd.MM.yyyy_HH-mm-ss"));
+            string fileName= string.Format("{0}_{1}",NameBase, DateTime.Now.ToString("dd.MM.yyyy_HH-mm-ss"));
+            string fullPath = Directory + "\\" + fileName + ".bak";
             string sqlExpression = $"BACKUP DATABASE [{NameBase}] " +
-                                   $"TO DISK = N'{path}' " +
-                                   $"WITH FORMAT, NAME = N'{NameBase} Database Full Backup'"; //Проверка на наличие объекта
+                                   $"TO DISK = N'{fullPath}' " +
+                                   $"WITH FORMAT, NAME = N'{fileName} Database Full Backup'"; //Проверка на наличие объекта
             if (conn != null)
             {
                 try
@@ -68,10 +69,12 @@ namespace databaseBackup
 
         }
         //Метод восстановления базы данных
-        public int Recovery(string FileNamePath, string FileName)
+        public int Recovery(string FileNamePath, string nameBase)
         {
             //Создание строки
-            string sqlExpression = " USE [master] RESTORE DATABASE[" + FileName + "] FROM DISK = N'" + FileNamePath + "' WITH FILE = 1, NOUNLOAD, STATS = 5";
+            string sqlExpression = "USE [master] RESTORE DATABASE[" + nameBase + "] " +
+                "FROM DISK = N'" + FileNamePath + 
+                "' WITH FILE = 1, NOUNLOAD, STATS = 5";
             // Проверка на наличие объекта соединения
             if (conn != null)
             {
