@@ -31,7 +31,6 @@ namespace databaseBackup
             //Создание объекта
             conn = new SqlConnection(connString);
         }
-
         //Метод резевного копирования базы данных
         public int Backups(string NameBase, string Directory)
         {
@@ -66,7 +65,6 @@ namespace databaseBackup
                 conn.Close();
                 return 2;
             }
-
         }
         //Метод восстановления базы данных
         public int Recovery(string FileNamePath, string nameBase)

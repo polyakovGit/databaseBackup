@@ -29,7 +29,6 @@ namespace databaseBackup
             bD.Connection(Parameters[0], Parameters[1], Parameters[2]);
             timer1.Interval = 3600000;
             timer1.Start();
-
         }
         //Обработчик нажатия на кнопку Подключиться
         private void buttonConnect_Click(object sender, EventArgs e)
@@ -72,7 +71,6 @@ namespace databaseBackup
                 // Обработчик исходов резервного копирования
                 checkCommand(bD.Backups(NameBase, Directory));
             }
-
         }
         // Обработчик нажатия на кнопку Выбрать файл
         private void buttonRecovery_Click(object sender, EventArgs e)
@@ -93,7 +91,6 @@ namespace databaseBackup
                 }
             }
         }
-
         private void buttonSaveInterval_Click(object sender, EventArgs e)
         {
             string[] Parameters = file.ReadFileParametersBD();
@@ -158,7 +155,6 @@ namespace databaseBackup
                     break;
             }
         }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             PlanCopy();
