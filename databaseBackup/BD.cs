@@ -35,8 +35,8 @@ namespace databaseBackup
         public int Backups(string NameBase, string Directory)
         {
             //Создание строки
-            string fileName= string.Format("{0}_{1}",NameBase, DateTime.Now.ToString("dd.MM.yyyy_HH-mm-ss"));
-            string fullPath = Directory + "\\" + fileName + ".bak";
+            string fileName= string.Format("{0}_{1}.bak", NameBase, DateTime.Now.ToString("dd.MM.yyyy_HH-mm-ss"));
+            string fullPath = Directory + "\\" + fileName;
             string sqlExpression = $"BACKUP DATABASE [{NameBase}] " +
                                    $"TO DISK = N'{fullPath}' " +
                                    $"WITH FORMAT, NAME = N'{fileName} Database Full Backup'"; //Проверка на наличие объекта
