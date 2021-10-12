@@ -21,10 +21,9 @@ namespace databaseBackup
 {
     public partial class Form1 : Form
     {
-        ServerConnection srvConn;
-        public Server srv;
-
+        Form2 form2;
         //Создание объекта класса
+        dataBaseClass dtbc = dataBaseClass.getInstance();
         //BD bD = BD.getInstance();
         //File file = new File();
         public Form1()
@@ -32,6 +31,7 @@ namespace databaseBackup
             InitializeComponent();
             comboBoxNameServer.SelectedItem = comboBoxNameServer.Items[0];
             comboBoxAuthentication.SelectedItem = comboBoxAuthentication.Items[0];
+            form2 = new Form2();
             //string[] Parameters = file.ReadFileParametersBD();
             //textBoxNameServer.Text = Parameters[0];
             //textBoxNameUser.Text = Parameters[1];
@@ -47,7 +47,7 @@ namespace databaseBackup
         {
             comboBoxdataBasesforBackup.Items.Clear();
             comboBoxdataBasesforRestore.Items.Clear();
-            foreach (Database item in srv.Databases)
+            foreach (Database item in dtbc.srv.Databases)
             {
                 comboBoxdataBasesforBackup.Items.Add(item.Name);
                 comboBoxdataBasesforRestore.Items.Add(item.Name);
@@ -56,20 +56,23 @@ namespace databaseBackup
         private void buttonConnect_Click(object sender, EventArgs e)
         {
             string Server = comboBoxNameServer.Text;
+            dtbc.serverName = Server;
             if (comboBoxAuthentication.SelectedIndex == 0)
             {
-                srv = new Server(Server);
+                dtbc.srv = new Server(Server);
             }
             //Считывание значений с textBoxs
             else
             {
                 string NameUser = textBoxNameUser.Text;
                 string Pass = textBoxPass.Text;
-                srvConn = new ServerConnection(Server, NameUser, Pass);
-                srv = new Server(srvConn);
+                dtbc.srvConn = new ServerConnection(Server, NameUser, Pass);
+                dtbc.srv = new Server(dtbc.srvConn);
             }
             MessageBox.Show("Соединение установлено");
             addAllDatabasesToLists();
+            newJob_button.Enabled = true;
+            RefreshJobs();
             ////Вызов метода подключения к базе данных, который находится в классе BD
             //bD.Connection(Server, NameUser, Pass);
         }
@@ -108,7 +111,7 @@ namespace databaseBackup
                 $".bak");
             bdi = new BackupDeviceItem(path, DeviceType.File);
             bk.Devices.Add(bdi);
-            bk.SqlBackup(srv);
+            bk.SqlBackup(dtbc.srv);
             bk.Devices.Remove(bdi);
             //    // Считывание значения из textBox
             //    string NameBase = textBoxNameBase.Text;
@@ -135,6 +138,9 @@ namespace databaseBackup
             {
                 label5.Text = $"{e.Percent}%";
             });
+            progressBar1.Value = 0;
+            progressBar1.Update();
+            label5.Text = "0%";
         }
         void Restore_Completed(object sender, ServerMessageEventArgs e)
         {
@@ -164,23 +170,23 @@ namespace databaseBackup
                     if (comboBoxdataBasesforRestore.Text != null)
                     {
                         string db = comboBoxdataBasesforRestore.Text;
-                        currentDb = srv.Databases[db];
+                        currentDb = dtbc.srv.Databases[db];
                         if (currentDb != null)
                         {
-                            srv.KillAllProcesses(currentDb.Name);
+                            dtbc.srv.KillAllProcesses(currentDb.Name);
                         }
                         restore.Database = db;
                         restore.Devices.Add(bdi);
-                        restore.SqlRestore(srv);
+                        restore.SqlRestore(dtbc.srv);
                         addAllDatabasesToLists();
                     }
                 }
                 else
                 {
-                    Database newDb = new Database(srv, textBoxNewDatabase.Text);
+                    Database newDb = new Database(dtbc.srv, textBoxNewDatabase.Text);
                     restore.Database = newDb.Name;
                     restore.Devices.Add(bdi);
-                    restore.SqlRestoreAsync(srv);
+                    restore.SqlRestoreAsync(dtbc.srv);
                     addAllDatabasesToLists();
                 }
             }
@@ -304,6 +310,17 @@ namespace databaseBackup
             if (comboBoxAuthentication.SelectedIndex == 0)
                 textBoxNameUser.Enabled = textBoxPass.Enabled = false;
             else textBoxNameUser.Enabled = textBoxPass.Enabled = true;
+        }
+
+        private void newJob_button_Click(object sender, EventArgs e)
+        {
+            form2.ShowDialog();
+            RefreshJobs();
+        }
+        public void RefreshJobs()
+        {
+            foreach (Job item in dtbc.srv.JobServer.Jobs)
+                dataGridView1.Rows.Add(item.JobID, item.Name, item.IsEnabled, item.DateCreated);
         }
     }
 }

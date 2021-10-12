@@ -39,16 +39,19 @@ namespace databaseBackup
             this.labelNameUser = new System.Windows.Forms.Label();
             this.labelPass = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBoxAuthentication = new System.Windows.Forms.ComboBox();
             this.comboBoxNameServer = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.textBoxNameBase = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.checkBoxLife = new System.Windows.Forms.CheckBox();
             this.comboBoxdataBasesforBackup = new System.Windows.Forms.ComboBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.textBoxNewDatabase = new System.Windows.Forms.TextBox();
             this.buttonRecovery = new System.Windows.Forms.Button();
             this.radioButtonToNewDatabase = new System.Windows.Forms.RadioButton();
@@ -58,16 +61,18 @@ namespace databaseBackup
             this.label4 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.buttonSaveInterval = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.newJob_button = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.label5 = new System.Windows.Forms.Label();
-            this.comboBoxAuthentication = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonConnect
@@ -85,7 +90,7 @@ namespace databaseBackup
             // buttonCopy
             // 
             this.buttonCopy.ForeColor = System.Drawing.Color.Green;
-            this.buttonCopy.Location = new System.Drawing.Point(253, 125);
+            this.buttonCopy.Location = new System.Drawing.Point(46, 113);
             this.buttonCopy.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCopy.Name = "buttonCopy";
             this.buttonCopy.Size = new System.Drawing.Size(156, 24);
@@ -174,7 +179,7 @@ namespace databaseBackup
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox1.ForeColor = System.Drawing.Color.Green;
-            this.groupBox1.Location = new System.Drawing.Point(2, 77);
+            this.groupBox1.Location = new System.Drawing.Point(11, 50);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
@@ -182,6 +187,18 @@ namespace databaseBackup
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Параметры подключения";
+            // 
+            // comboBoxAuthentication
+            // 
+            this.comboBoxAuthentication.FormattingEnabled = true;
+            this.comboBoxAuthentication.Items.AddRange(new object[] {
+            "Проверка подлинности Windows",
+            "Проверка подлинности SQL Server"});
+            this.comboBoxAuthentication.Location = new System.Drawing.Point(118, 39);
+            this.comboBoxAuthentication.Name = "comboBoxAuthentication";
+            this.comboBoxAuthentication.Size = new System.Drawing.Size(200, 21);
+            this.comboBoxAuthentication.TabIndex = 18;
+            this.comboBoxAuthentication.SelectedIndexChanged += new System.EventHandler(this.comboBoxAuthentication_SelectedIndexChanged);
             // 
             // comboBoxNameServer
             // 
@@ -198,47 +215,36 @@ namespace databaseBackup
             // 
             this.groupBox2.Controls.Add(this.monthCalendar1);
             this.groupBox2.Controls.Add(this.textBoxNameBase);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.buttonCopy);
             this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.checkBoxLife);
+            this.groupBox2.Controls.Add(this.buttonCopy);
             this.groupBox2.Controls.Add(this.comboBoxdataBasesforBackup);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox2.ForeColor = System.Drawing.Color.Green;
-            this.groupBox2.Location = new System.Drawing.Point(342, 77);
+            this.groupBox2.Location = new System.Drawing.Point(342, 24);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(456, 247);
+            this.groupBox2.Size = new System.Drawing.Size(456, 212);
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Резервное копирование";
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(11, 65);
+            this.monthCalendar1.Location = new System.Drawing.Point(247, 38);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 17;
             // 
             // textBoxNameBase
             // 
             this.textBoxNameBase.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxNameBase.Location = new System.Drawing.Point(232, 96);
+            this.textBoxNameBase.Location = new System.Drawing.Point(25, 84);
             this.textBoxNameBase.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxNameBase.Name = "textBoxNameBase";
             this.textBoxNameBase.Size = new System.Drawing.Size(198, 21);
             this.textBoxNameBase.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.Maroon;
-            this.label1.Location = new System.Drawing.Point(217, 68);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(226, 26);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "имя базы данных, с которой\r\nнужно произвести резервное копирования";
             // 
             // label3
             // 
@@ -249,10 +255,21 @@ namespace databaseBackup
             this.label3.TabIndex = 17;
             this.label3.Text = "Базы данных";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.Maroon;
+            this.label1.Location = new System.Drawing.Point(10, 56);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(226, 26);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "имя базы данных, с которой\r\nнужно произвести резервное копирования";
+            // 
             // checkBoxLife
             // 
             this.checkBoxLife.AutoSize = true;
-            this.checkBoxLife.Location = new System.Drawing.Point(8, 46);
+            this.checkBoxLife.Location = new System.Drawing.Point(247, 16);
             this.checkBoxLife.Name = "checkBoxLife";
             this.checkBoxLife.Size = new System.Drawing.Size(100, 17);
             this.checkBoxLife.TabIndex = 19;
@@ -282,7 +299,7 @@ namespace databaseBackup
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox3.ForeColor = System.Drawing.Color.Green;
-            this.groupBox3.Location = new System.Drawing.Point(802, 77);
+            this.groupBox3.Location = new System.Drawing.Point(814, 28);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
@@ -290,6 +307,22 @@ namespace databaseBackup
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Восстановление базы данных";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(136, 88);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(21, 13);
+            this.label5.TabIndex = 28;
+            this.label5.Text = "0%";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(44, 103);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(211, 23);
+            this.progressBar1.TabIndex = 27;
             // 
             // textBoxNewDatabase
             // 
@@ -372,80 +405,65 @@ namespace databaseBackup
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.buttonSaveInterval);
-            this.groupBox4.Controls.Add(this.comboBox1);
-            this.groupBox4.Location = new System.Drawing.Point(2, 427);
+            this.groupBox4.Controls.Add(this.newJob_button);
+            this.groupBox4.Controls.Add(this.dataGridView1);
+            this.groupBox4.Location = new System.Drawing.Point(18, 258);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox4.Size = new System.Drawing.Size(318, 83);
+            this.groupBox4.Size = new System.Drawing.Size(780, 219);
             this.groupBox4.TabIndex = 16;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Расписание копирования";
             // 
-            // buttonSaveInterval
+            // newJob_button
             // 
-            this.buttonSaveInterval.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonSaveInterval.ForeColor = System.Drawing.Color.Green;
-            this.buttonSaveInterval.Location = new System.Drawing.Point(78, 55);
-            this.buttonSaveInterval.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonSaveInterval.Name = "buttonSaveInterval";
-            this.buttonSaveInterval.Size = new System.Drawing.Size(156, 24);
-            this.buttonSaveInterval.TabIndex = 17;
-            this.buttonSaveInterval.Text = "Сохранить";
-            this.buttonSaveInterval.UseVisualStyleBackColor = true;
-            this.buttonSaveInterval.Click += new System.EventHandler(this.buttonSaveInterval_Click);
+            this.newJob_button.Enabled = false;
+            this.newJob_button.Location = new System.Drawing.Point(504, 32);
+            this.newJob_button.Name = "newJob_button";
+            this.newJob_button.Size = new System.Drawing.Size(137, 34);
+            this.newJob_button.TabIndex = 1;
+            this.newJob_button.Text = "Создать задание";
+            this.newJob_button.UseVisualStyleBackColor = true;
+            this.newJob_button.Click += new System.EventHandler(this.newJob_button_Click);
             // 
-            // comboBox1
+            // dataGridView1
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Каждый час",
-            "Каждые 3 часа",
-            "Каждые 6 часов",
-            "Каждые 12 часов",
-            "Каждый день",
-            "Каждую неделю",
-            "Каждый месяц"});
-            this.comboBox1.Location = new System.Drawing.Point(78, 17);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(157, 21);
-            this.comboBox1.TabIndex = 0;
-            this.comboBox1.Text = "Выберите интервал";
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4});
+            this.dataGridView1.Location = new System.Drawing.Point(5, 18);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(453, 150);
+            this.dataGridView1.TabIndex = 0;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "ID";
+            this.Column1.Name = "Column1";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Name";
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "IsEnabled";
+            this.Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "DateCreated";
+            this.Column4.Name = "Column4";
             // 
             // timer1
             // 
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(44, 103);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(211, 23);
-            this.progressBar1.TabIndex = 27;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(136, 88);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(21, 13);
-            this.label5.TabIndex = 28;
-            this.label5.Text = "0%";
-            // 
-            // comboBoxAuthentication
-            // 
-            this.comboBoxAuthentication.FormattingEnabled = true;
-            this.comboBoxAuthentication.Items.AddRange(new object[] {
-            "Проверка подлинности Windows",
-            "Проверка подлинности SQL Server"});
-            this.comboBoxAuthentication.Location = new System.Drawing.Point(118, 39);
-            this.comboBoxAuthentication.Name = "comboBoxAuthentication";
-            this.comboBoxAuthentication.Size = new System.Drawing.Size(200, 21);
-            this.comboBoxAuthentication.TabIndex = 18;
-            this.comboBoxAuthentication.SelectedIndexChanged += new System.EventHandler(this.comboBoxAuthentication_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -469,6 +487,7 @@ namespace databaseBackup
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -494,8 +513,6 @@ namespace databaseBackup
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Button buttonSaveInterval;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ComboBox comboBoxNameServer;
         private System.Windows.Forms.Label label3;
@@ -510,6 +527,12 @@ namespace databaseBackup
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox comboBoxAuthentication;
+        private System.Windows.Forms.Button newJob_button;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
     }
 }
 
