@@ -14,6 +14,8 @@ using Microsoft.SqlServer.Management.Smo.Agent;
 using Microsoft.SqlServer.Management.Common;
 using System.Data.Sql;
 using System.Globalization;
+using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace databaseBackup
 {
@@ -88,15 +90,7 @@ namespace databaseBackup
                 bk.Database = comboBoxdataBasesforBackup.SelectedItem.ToString();
             bk.Incremental = false;
             if (checkBoxLife.Checked)
-            {
                 bk.ExpirationDate = monthCalendar1.SelectionStart;
-                //я не знаю почему здесь путается день и месяц
-
-                //bk.ExpirationDate = new DateTime(
-                //    monthCalendar1.SelectionStart.Year,
-                //     monthCalendar1.SelectionStart.Month,
-                //     monthCalendar1.SelectionStart.Day);
-            }
             BackupDeviceItem bdi = null;
             DateTime dt = DateTime.Now;
             string path = "";
