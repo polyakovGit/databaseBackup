@@ -31,6 +31,7 @@ namespace databaseBackup
         {
             InitializeComponent();
             comboBoxNameServer.SelectedItem = comboBoxNameServer.Items[0];
+            comboBoxAuthentication.SelectedItem = comboBoxAuthentication.Items[0];
             //string[] Parameters = file.ReadFileParametersBD();
             //textBoxNameServer.Text = Parameters[0];
             //textBoxNameUser.Text = Parameters[1];
@@ -54,12 +55,20 @@ namespace databaseBackup
         }
         private void buttonConnect_Click(object sender, EventArgs e)
         {
-            //Считывание значений с textBoxs
             string Server = comboBoxNameServer.Text;
-            string NameUser = textBoxNameUser.Text;
-            string Pass = textBoxPass.Text;
-            srvConn = new ServerConnection(Server, NameUser, Pass);
-            srv = new Server(srvConn);
+            if (comboBoxAuthentication.SelectedIndex == 0)
+            {
+                srv = new Server(Server);
+            }
+            //Считывание значений с textBoxs
+            else
+            {
+                string NameUser = textBoxNameUser.Text;
+                string Pass = textBoxPass.Text;
+                srvConn = new ServerConnection(Server, NameUser, Pass);
+                srv = new Server(srvConn);
+            }
+            MessageBox.Show("Соединение установлено");
             addAllDatabasesToLists();
             ////Вызов метода подключения к базе данных, который находится в классе BD
             //bD.Connection(Server, NameUser, Pass);
@@ -115,17 +124,40 @@ namespace databaseBackup
             //        checkCommand(bD.Backups(NameBase, Directory));
             //    }
         }
+        private void RestorePercent_Completed(object sender, PercentCompleteEventArgs e)
+        {
+            progressBar1.Invoke((MethodInvoker)delegate
+            {
+                progressBar1.Value = e.Percent;
+                progressBar1.Update();
+            });
+            label5.Invoke((MethodInvoker)delegate
+            {
+                label5.Text = $"{e.Percent}%";
+            });
+        }
+        void Restore_Completed(object sender, ServerMessageEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                MessageBox.Show(e.Error.Message);
+            }
+        }
         // Обработчик нажатия на кнопку Выбрать файл
         private void buttonRecovery_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                string filePath = openFileDialog1.FileName;
+                string databaseName = textBoxNewDatabase.Text;
                 Restore restore = new Restore();
                 restore.Action = RestoreActionType.Database;
                 restore.NoRecovery = false;
-                string path = openFileDialog1.FileName;
-                BackupDeviceItem bdi = new BackupDeviceItem(path, DeviceType.File);
+
+                BackupDeviceItem bdi = new BackupDeviceItem(filePath, DeviceType.File);
                 Database currentDb = null;
+                restore.Complete += Restore_Completed;
+                restore.PercentComplete += RestorePercent_Completed;
                 restore.ReplaceDatabase = true;
                 if (radioButtonToOldDatabase.Checked)
                 {
@@ -265,6 +297,13 @@ namespace databaseBackup
         private void radioButtonToNewDatabase_CheckedChanged(object sender, EventArgs e)
         {
             radioButtonToOldDatabase.Checked = !radioButtonToNewDatabase.Checked;
+        }
+
+        private void comboBoxAuthentication_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxAuthentication.SelectedIndex == 0)
+                textBoxNameUser.Enabled = textBoxPass.Enabled = false;
+            else textBoxNameUser.Enabled = textBoxPass.Enabled = true;
         }
     }
 }

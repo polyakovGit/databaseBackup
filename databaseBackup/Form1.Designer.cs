@@ -41,6 +41,7 @@ namespace databaseBackup
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBoxNameServer = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.textBoxNameBase = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -48,19 +49,21 @@ namespace databaseBackup
             this.comboBoxdataBasesforBackup = new System.Windows.Forms.ComboBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.textBoxNewDatabase = new System.Windows.Forms.TextBox();
+            this.buttonRecovery = new System.Windows.Forms.Button();
+            this.radioButtonToNewDatabase = new System.Windows.Forms.RadioButton();
+            this.radioButtonToOldDatabase = new System.Windows.Forms.RadioButton();
+            this.label2 = new System.Windows.Forms.Label();
             this.comboBoxdataBasesforRestore = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.buttonRecovery = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.buttonSaveInterval = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
-            this.radioButtonToOldDatabase = new System.Windows.Forms.RadioButton();
-            this.radioButtonToNewDatabase = new System.Windows.Forms.RadioButton();
-            this.textBoxNewDatabase = new System.Windows.Forms.TextBox();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.label5 = new System.Windows.Forms.Label();
+            this.comboBoxAuthentication = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -70,7 +73,7 @@ namespace databaseBackup
             // buttonConnect
             // 
             this.buttonConnect.ForeColor = System.Drawing.Color.Green;
-            this.buttonConnect.Location = new System.Drawing.Point(62, 91);
+            this.buttonConnect.Location = new System.Drawing.Point(63, 125);
             this.buttonConnect.Margin = new System.Windows.Forms.Padding(2);
             this.buttonConnect.Name = "buttonConnect";
             this.buttonConnect.Size = new System.Drawing.Size(156, 24);
@@ -106,7 +109,7 @@ namespace databaseBackup
             // textBoxNameUser
             // 
             this.textBoxNameUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxNameUser.Location = new System.Drawing.Point(118, 38);
+            this.textBoxNameUser.Location = new System.Drawing.Point(118, 65);
             this.textBoxNameUser.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxNameUser.Name = "textBoxNameUser";
             this.textBoxNameUser.Size = new System.Drawing.Size(200, 21);
@@ -115,7 +118,7 @@ namespace databaseBackup
             // textBoxPass
             // 
             this.textBoxPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxPass.Location = new System.Drawing.Point(118, 61);
+            this.textBoxPass.Location = new System.Drawing.Point(118, 96);
             this.textBoxPass.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxPass.Name = "textBoxPass";
             this.textBoxPass.PasswordChar = '*';
@@ -139,7 +142,7 @@ namespace databaseBackup
             this.labelNameUser.AutoSize = true;
             this.labelNameUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelNameUser.ForeColor = System.Drawing.Color.Maroon;
-            this.labelNameUser.Location = new System.Drawing.Point(4, 42);
+            this.labelNameUser.Location = new System.Drawing.Point(4, 70);
             this.labelNameUser.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelNameUser.Name = "labelNameUser";
             this.labelNameUser.Size = new System.Drawing.Size(106, 13);
@@ -151,7 +154,7 @@ namespace databaseBackup
             this.labelPass.AutoSize = true;
             this.labelPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelPass.ForeColor = System.Drawing.Color.Maroon;
-            this.labelPass.Location = new System.Drawing.Point(60, 65);
+            this.labelPass.Location = new System.Drawing.Point(60, 96);
             this.labelPass.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPass.Name = "labelPass";
             this.labelPass.Size = new System.Drawing.Size(48, 13);
@@ -160,6 +163,7 @@ namespace databaseBackup
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.comboBoxAuthentication);
             this.groupBox1.Controls.Add(this.comboBoxNameServer);
             this.groupBox1.Controls.Add(this.textBoxNameUser);
             this.groupBox1.Controls.Add(this.labelPass);
@@ -174,7 +178,7 @@ namespace databaseBackup
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(322, 120);
+            this.groupBox1.Size = new System.Drawing.Size(322, 186);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Параметры подключения";
@@ -209,6 +213,12 @@ namespace databaseBackup
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Резервное копирование";
+            // 
+            // monthCalendar1
+            // 
+            this.monthCalendar1.Location = new System.Drawing.Point(11, 65);
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.TabIndex = 17;
             // 
             // textBoxNameBase
             // 
@@ -261,6 +271,8 @@ namespace databaseBackup
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.progressBar1);
             this.groupBox3.Controls.Add(this.textBoxNewDatabase);
             this.groupBox3.Controls.Add(this.buttonRecovery);
             this.groupBox3.Controls.Add(this.radioButtonToNewDatabase);
@@ -279,6 +291,64 @@ namespace databaseBackup
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Восстановление базы данных";
             // 
+            // textBoxNewDatabase
+            // 
+            this.textBoxNewDatabase.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxNewDatabase.Location = new System.Drawing.Point(156, 65);
+            this.textBoxNewDatabase.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxNewDatabase.Name = "textBoxNewDatabase";
+            this.textBoxNewDatabase.Size = new System.Drawing.Size(129, 21);
+            this.textBoxNewDatabase.TabIndex = 26;
+            // 
+            // buttonRecovery
+            // 
+            this.buttonRecovery.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonRecovery.ForeColor = System.Drawing.Color.Green;
+            this.buttonRecovery.Location = new System.Drawing.Point(67, 170);
+            this.buttonRecovery.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonRecovery.Name = "buttonRecovery";
+            this.buttonRecovery.Size = new System.Drawing.Size(156, 24);
+            this.buttonRecovery.TabIndex = 16;
+            this.buttonRecovery.Text = "Выбрать файл";
+            this.buttonRecovery.UseVisualStyleBackColor = true;
+            this.buttonRecovery.Click += new System.EventHandler(this.buttonRecovery_Click);
+            // 
+            // radioButtonToNewDatabase
+            // 
+            this.radioButtonToNewDatabase.AutoSize = true;
+            this.radioButtonToNewDatabase.Location = new System.Drawing.Point(156, 20);
+            this.radioButtonToNewDatabase.Name = "radioButtonToNewDatabase";
+            this.radioButtonToNewDatabase.Size = new System.Drawing.Size(85, 17);
+            this.radioButtonToNewDatabase.TabIndex = 25;
+            this.radioButtonToNewDatabase.TabStop = true;
+            this.radioButtonToNewDatabase.Text = "В новую БД";
+            this.radioButtonToNewDatabase.UseVisualStyleBackColor = true;
+            this.radioButtonToNewDatabase.CheckedChanged += new System.EventHandler(this.radioButtonToNewDatabase_CheckedChanged);
+            // 
+            // radioButtonToOldDatabase
+            // 
+            this.radioButtonToOldDatabase.AutoSize = true;
+            this.radioButtonToOldDatabase.Checked = true;
+            this.radioButtonToOldDatabase.Location = new System.Drawing.Point(8, 21);
+            this.radioButtonToOldDatabase.Name = "radioButtonToOldDatabase";
+            this.radioButtonToOldDatabase.Size = new System.Drawing.Size(132, 17);
+            this.radioButtonToOldDatabase.TabIndex = 24;
+            this.radioButtonToOldDatabase.TabStop = true;
+            this.radioButtonToOldDatabase.Text = "В существующую БД";
+            this.radioButtonToOldDatabase.UseVisualStyleBackColor = true;
+            this.radioButtonToOldDatabase.CheckedChanged += new System.EventHandler(this.radioButtonToOldDatabase_CheckedChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.Maroon;
+            this.label2.Location = new System.Drawing.Point(48, 146);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(193, 13);
+            this.label2.TabIndex = 15;
+            this.label2.Text = "Выберите файл для восстановления";
+            // 
             // comboBoxdataBasesforRestore
             // 
             this.comboBoxdataBasesforRestore.FormattingEnabled = true;
@@ -295,30 +365,6 @@ namespace databaseBackup
             this.label4.Size = new System.Drawing.Size(74, 13);
             this.label4.TabIndex = 23;
             this.label4.Text = "Базы данных";
-            // 
-            // buttonRecovery
-            // 
-            this.buttonRecovery.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonRecovery.ForeColor = System.Drawing.Color.Green;
-            this.buttonRecovery.Location = new System.Drawing.Point(67, 170);
-            this.buttonRecovery.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonRecovery.Name = "buttonRecovery";
-            this.buttonRecovery.Size = new System.Drawing.Size(156, 24);
-            this.buttonRecovery.TabIndex = 16;
-            this.buttonRecovery.Text = "Выбрать файл";
-            this.buttonRecovery.UseVisualStyleBackColor = true;
-            this.buttonRecovery.Click += new System.EventHandler(this.buttonRecovery_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.Maroon;
-            this.label2.Location = new System.Drawing.Point(48, 146);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(193, 13);
-            this.label2.TabIndex = 15;
-            this.label2.Text = "Выберите файл для восстановления";
             // 
             // openFileDialog1
             // 
@@ -373,45 +419,33 @@ namespace databaseBackup
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // monthCalendar1
+            // progressBar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(11, 65);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 17;
+            this.progressBar1.Location = new System.Drawing.Point(44, 103);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(211, 23);
+            this.progressBar1.TabIndex = 27;
             // 
-            // radioButtonToOldDatabase
+            // label5
             // 
-            this.radioButtonToOldDatabase.AutoSize = true;
-            this.radioButtonToOldDatabase.Checked = true;
-            this.radioButtonToOldDatabase.Location = new System.Drawing.Point(8, 21);
-            this.radioButtonToOldDatabase.Name = "radioButtonToOldDatabase";
-            this.radioButtonToOldDatabase.Size = new System.Drawing.Size(132, 17);
-            this.radioButtonToOldDatabase.TabIndex = 24;
-            this.radioButtonToOldDatabase.TabStop = true;
-            this.radioButtonToOldDatabase.Text = "В существующую БД";
-            this.radioButtonToOldDatabase.UseVisualStyleBackColor = true;
-            this.radioButtonToOldDatabase.CheckedChanged += new System.EventHandler(this.radioButtonToOldDatabase_CheckedChanged);
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(136, 88);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(21, 13);
+            this.label5.TabIndex = 28;
+            this.label5.Text = "0%";
             // 
-            // radioButtonToNewDatabase
+            // comboBoxAuthentication
             // 
-            this.radioButtonToNewDatabase.AutoSize = true;
-            this.radioButtonToNewDatabase.Location = new System.Drawing.Point(156, 20);
-            this.radioButtonToNewDatabase.Name = "radioButtonToNewDatabase";
-            this.radioButtonToNewDatabase.Size = new System.Drawing.Size(85, 17);
-            this.radioButtonToNewDatabase.TabIndex = 25;
-            this.radioButtonToNewDatabase.TabStop = true;
-            this.radioButtonToNewDatabase.Text = "В новую БД";
-            this.radioButtonToNewDatabase.UseVisualStyleBackColor = true;
-            this.radioButtonToNewDatabase.CheckedChanged += new System.EventHandler(this.radioButtonToNewDatabase_CheckedChanged);
-            // 
-            // textBoxNewDatabase
-            // 
-            this.textBoxNewDatabase.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxNewDatabase.Location = new System.Drawing.Point(156, 65);
-            this.textBoxNewDatabase.Margin = new System.Windows.Forms.Padding(2);
-            this.textBoxNewDatabase.Name = "textBoxNewDatabase";
-            this.textBoxNewDatabase.Size = new System.Drawing.Size(129, 21);
-            this.textBoxNewDatabase.TabIndex = 26;
+            this.comboBoxAuthentication.FormattingEnabled = true;
+            this.comboBoxAuthentication.Items.AddRange(new object[] {
+            "Проверка подлинности Windows",
+            "Проверка подлинности SQL Server"});
+            this.comboBoxAuthentication.Location = new System.Drawing.Point(118, 39);
+            this.comboBoxAuthentication.Name = "comboBoxAuthentication";
+            this.comboBoxAuthentication.Size = new System.Drawing.Size(200, 21);
+            this.comboBoxAuthentication.TabIndex = 18;
+            this.comboBoxAuthentication.SelectedIndexChanged += new System.EventHandler(this.comboBoxAuthentication_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -473,6 +507,9 @@ namespace databaseBackup
         private System.Windows.Forms.RadioButton radioButtonToOldDatabase;
         private System.Windows.Forms.RadioButton radioButtonToNewDatabase;
         private System.Windows.Forms.TextBox textBoxNewDatabase;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox comboBoxAuthentication;
     }
 }
 
