@@ -14,8 +14,6 @@ using Microsoft.SqlServer.Management.Smo.Agent;
 using Microsoft.SqlServer.Management.Common;
 using System.Data.Sql;
 using System.Globalization;
-using System.Data.SqlClient;
-using System.Text.RegularExpressions;
 
 namespace databaseBackup
 {
@@ -94,6 +92,7 @@ namespace databaseBackup
         }
         private void buttonCopy_Click(object sender, EventArgs e)
         {
+            string databaseName = textBoxNameBase.Text;
             var bk = new Backup();
             bk.Action = BackupActionType.Database;
             bk.BackupSetDescription = "Full backup testdb";
@@ -101,12 +100,12 @@ namespace databaseBackup
             if (comboBoxdataBasesforBackup.SelectedItem != null)
                 bk.Database = comboBoxdataBasesforBackup.SelectedItem.ToString();
             bk.Incremental = false;
-            if (checkBoxLife.Checked)
+            if (checkBoxExpirationDate.Checked)
                 bk.ExpirationDate = monthCalendar1.SelectionStart;
             BackupDeviceItem bdi = null;
             DateTime dt = DateTime.Now;
             string path = "";
-            path = string.Format($"{textBoxNameBase.Text}_" +
+            path = string.Format($"{textBoxNameBase}_" +
                 $"{DateTime.Now.ToString("dd.MM.yyyy_HH-mm-ss")}" +
                 $".bak");
             bdi = new BackupDeviceItem(path, DeviceType.File);
@@ -156,6 +155,7 @@ namespace databaseBackup
             {
                 string filePath = openFileDialog1.FileName;
                 string databaseName = textBoxNewDatabase.Text;
+
                 Restore restore = new Restore();
                 restore.Action = RestoreActionType.Database;
                 restore.NoRecovery = false;
@@ -319,6 +319,7 @@ namespace databaseBackup
         }
         public void RefreshJobs()
         {
+            dataGridView1.Rows.Clear();
             foreach (Job item in dtbc.srv.JobServer.Jobs)
                 dataGridView1.Rows.Add(item.JobID, item.Name, item.IsEnabled, item.DateCreated);
         }

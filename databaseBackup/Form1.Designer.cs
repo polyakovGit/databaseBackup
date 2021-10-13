@@ -46,7 +46,7 @@ namespace databaseBackup
             this.textBoxNameBase = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.checkBoxLife = new System.Windows.Forms.CheckBox();
+            this.checkBoxExpirationDate = new System.Windows.Forms.CheckBox();
             this.comboBoxdataBasesforBackup = new System.Windows.Forms.ComboBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -68,6 +68,7 @@ namespace databaseBackup
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -78,7 +79,7 @@ namespace databaseBackup
             // buttonConnect
             // 
             this.buttonConnect.ForeColor = System.Drawing.Color.Green;
-            this.buttonConnect.Location = new System.Drawing.Point(63, 125);
+            this.buttonConnect.Location = new System.Drawing.Point(63, 148);
             this.buttonConnect.Margin = new System.Windows.Forms.Padding(2);
             this.buttonConnect.Name = "buttonConnect";
             this.buttonConnect.Size = new System.Drawing.Size(156, 24);
@@ -90,7 +91,7 @@ namespace databaseBackup
             // buttonCopy
             // 
             this.buttonCopy.ForeColor = System.Drawing.Color.Green;
-            this.buttonCopy.Location = new System.Drawing.Point(46, 113);
+            this.buttonCopy.Location = new System.Drawing.Point(46, 150);
             this.buttonCopy.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCopy.Name = "buttonCopy";
             this.buttonCopy.Size = new System.Drawing.Size(156, 24);
@@ -114,7 +115,7 @@ namespace databaseBackup
             // textBoxNameUser
             // 
             this.textBoxNameUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxNameUser.Location = new System.Drawing.Point(118, 65);
+            this.textBoxNameUser.Location = new System.Drawing.Point(117, 84);
             this.textBoxNameUser.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxNameUser.Name = "textBoxNameUser";
             this.textBoxNameUser.Size = new System.Drawing.Size(200, 21);
@@ -123,7 +124,7 @@ namespace databaseBackup
             // textBoxPass
             // 
             this.textBoxPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxPass.Location = new System.Drawing.Point(118, 96);
+            this.textBoxPass.Location = new System.Drawing.Point(117, 115);
             this.textBoxPass.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxPass.Name = "textBoxPass";
             this.textBoxPass.PasswordChar = '*';
@@ -135,7 +136,7 @@ namespace databaseBackup
             this.labelNameServer.AutoSize = true;
             this.labelNameServer.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelNameServer.ForeColor = System.Drawing.Color.Maroon;
-            this.labelNameServer.Location = new System.Drawing.Point(33, 20);
+            this.labelNameServer.Location = new System.Drawing.Point(3, 63);
             this.labelNameServer.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelNameServer.Name = "labelNameServer";
             this.labelNameServer.Size = new System.Drawing.Size(77, 13);
@@ -147,7 +148,7 @@ namespace databaseBackup
             this.labelNameUser.AutoSize = true;
             this.labelNameUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelNameUser.ForeColor = System.Drawing.Color.Maroon;
-            this.labelNameUser.Location = new System.Drawing.Point(4, 70);
+            this.labelNameUser.Location = new System.Drawing.Point(3, 89);
             this.labelNameUser.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelNameUser.Name = "labelNameUser";
             this.labelNameUser.Size = new System.Drawing.Size(106, 13);
@@ -159,7 +160,7 @@ namespace databaseBackup
             this.labelPass.AutoSize = true;
             this.labelPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.labelPass.ForeColor = System.Drawing.Color.Maroon;
-            this.labelPass.Location = new System.Drawing.Point(60, 96);
+            this.labelPass.Location = new System.Drawing.Point(3, 120);
             this.labelPass.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPass.Name = "labelPass";
             this.labelPass.Size = new System.Drawing.Size(48, 13);
@@ -168,6 +169,7 @@ namespace databaseBackup
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.comboBoxAuthentication);
             this.groupBox1.Controls.Add(this.comboBoxNameServer);
             this.groupBox1.Controls.Add(this.textBoxNameUser);
@@ -192,9 +194,9 @@ namespace databaseBackup
             // 
             this.comboBoxAuthentication.FormattingEnabled = true;
             this.comboBoxAuthentication.Items.AddRange(new object[] {
-            "Проверка подлинности Windows",
-            "Проверка подлинности SQL Server"});
-            this.comboBoxAuthentication.Location = new System.Drawing.Point(118, 39);
+            "Проверка Windows",
+            "Проверка SQL Server"});
+            this.comboBoxAuthentication.Location = new System.Drawing.Point(117, 27);
             this.comboBoxAuthentication.Name = "comboBoxAuthentication";
             this.comboBoxAuthentication.Size = new System.Drawing.Size(200, 21);
             this.comboBoxAuthentication.TabIndex = 18;
@@ -204,8 +206,8 @@ namespace databaseBackup
             // 
             this.comboBoxNameServer.FormattingEnabled = true;
             this.comboBoxNameServer.Items.AddRange(new object[] {
-            "XENO-B-STATION\\SQLEXPRESS"});
-            this.comboBoxNameServer.Location = new System.Drawing.Point(118, 12);
+            "XENO-B-STATION"});
+            this.comboBoxNameServer.Location = new System.Drawing.Point(117, 58);
             this.comboBoxNameServer.Name = "comboBoxNameServer";
             this.comboBoxNameServer.Size = new System.Drawing.Size(199, 21);
             this.comboBoxNameServer.TabIndex = 17;
@@ -217,7 +219,7 @@ namespace databaseBackup
             this.groupBox2.Controls.Add(this.textBoxNameBase);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.checkBoxLife);
+            this.groupBox2.Controls.Add(this.checkBoxExpirationDate);
             this.groupBox2.Controls.Add(this.buttonCopy);
             this.groupBox2.Controls.Add(this.comboBoxdataBasesforBackup);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -234,13 +236,14 @@ namespace databaseBackup
             // monthCalendar1
             // 
             this.monthCalendar1.Location = new System.Drawing.Point(247, 38);
+            this.monthCalendar1.MaxSelectionCount = 1;
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 17;
             // 
             // textBoxNameBase
             // 
             this.textBoxNameBase.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxNameBase.Location = new System.Drawing.Point(25, 84);
+            this.textBoxNameBase.Location = new System.Drawing.Point(25, 115);
             this.textBoxNameBase.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxNameBase.Name = "textBoxNameBase";
             this.textBoxNameBase.Size = new System.Drawing.Size(198, 21);
@@ -259,23 +262,23 @@ namespace databaseBackup
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.Color.Maroon;
-            this.label1.Location = new System.Drawing.Point(10, 56);
+            this.label1.Location = new System.Drawing.Point(43, 64);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(226, 26);
+            this.label1.Size = new System.Drawing.Size(159, 26);
             this.label1.TabIndex = 13;
-            this.label1.Text = "имя базы данных, с которой\r\nнужно произвести резервное копирования";
+            this.label1.Text = "имя базы данных\r\nдля  резервного копирования";
             // 
-            // checkBoxLife
+            // checkBoxExpirationDate
             // 
-            this.checkBoxLife.AutoSize = true;
-            this.checkBoxLife.Location = new System.Drawing.Point(247, 16);
-            this.checkBoxLife.Name = "checkBoxLife";
-            this.checkBoxLife.Size = new System.Drawing.Size(100, 17);
-            this.checkBoxLife.TabIndex = 19;
-            this.checkBoxLife.Text = "срок хранения";
-            this.checkBoxLife.UseVisualStyleBackColor = true;
-            this.checkBoxLife.CheckedChanged += new System.EventHandler(this.checkBoxLife_CheckedChanged);
+            this.checkBoxExpirationDate.AutoSize = true;
+            this.checkBoxExpirationDate.Location = new System.Drawing.Point(247, 16);
+            this.checkBoxExpirationDate.Name = "checkBoxExpirationDate";
+            this.checkBoxExpirationDate.Size = new System.Drawing.Size(100, 17);
+            this.checkBoxExpirationDate.TabIndex = 19;
+            this.checkBoxExpirationDate.Text = "срок хранения";
+            this.checkBoxExpirationDate.UseVisualStyleBackColor = true;
+            this.checkBoxExpirationDate.CheckedChanged += new System.EventHandler(this.checkBoxLife_CheckedChanged);
             // 
             // comboBoxdataBasesforBackup
             // 
@@ -411,7 +414,7 @@ namespace databaseBackup
             this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox4.Size = new System.Drawing.Size(780, 219);
+            this.groupBox4.Size = new System.Drawing.Size(685, 219);
             this.groupBox4.TabIndex = 16;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Расписание копирования";
@@ -465,6 +468,18 @@ namespace databaseBackup
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label6.ForeColor = System.Drawing.Color.Maroon;
+            this.label6.Location = new System.Drawing.Point(3, 30);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(94, 13);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "Аутентификация:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -517,7 +532,7 @@ namespace databaseBackup
         private System.Windows.Forms.ComboBox comboBoxNameServer;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBoxdataBasesforBackup;
-        private System.Windows.Forms.CheckBox checkBoxLife;
+        private System.Windows.Forms.CheckBox checkBoxExpirationDate;
         private System.Windows.Forms.ComboBox comboBoxdataBasesforRestore;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.MonthCalendar monthCalendar1;
@@ -533,6 +548,7 @@ namespace databaseBackup
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.Label label6;
     }
 }
 

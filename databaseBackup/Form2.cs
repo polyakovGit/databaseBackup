@@ -21,10 +21,6 @@ namespace databaseBackup
         {
             InitializeComponent();
         }
-        public ComboBox myCombobox
-        {
-            get { return comboBoxDataBases; }
-        }
 
         private void CreateJob_Click(object sender, EventArgs e)
         {
@@ -44,7 +40,7 @@ namespace databaseBackup
                 return;
             }
 
-            string Directory = "..\\..\\";
+            string backupDirectory = dtbc.srv.BackupDirectory;
             // Вызов диалогового окна для выбора файла
             FolderBrowserDialog folderDlg = new FolderBrowserDialog();
             folderDlg.ShowNewFolderButton = true;
@@ -52,10 +48,10 @@ namespace databaseBackup
             if (result == DialogResult.OK)
             {
                 // Присваивание переменной пути до файла
-                Directory = folderDlg.SelectedPath;
+                backupDirectory = folderDlg.SelectedPath;
             }
             //полный бекап
-            jobStep.Command = dtbc.Backups(comboBoxDataBases.Text,Directory);
+            jobStep.Command = dtbc.Backups(comboBoxDataBases.Text, backupDirectory);
             jobStep.Create();
             jbs = new JobSchedule(job, JobName.Text);
             jbs.ActiveStartDate = startDateTimeJob.Value;
