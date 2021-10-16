@@ -12,8 +12,6 @@ using System.Windows.Forms;
 using Microsoft.SqlServer.Management.Smo;
 using Microsoft.SqlServer.Management.Smo.Agent;
 using Microsoft.SqlServer.Management.Common;
-using System.Data.Sql;
-using System.Globalization;
 
 namespace databaseBackup
 {
@@ -70,7 +68,7 @@ namespace databaseBackup
                 bk.Database = comboBoxdataBasesforBackup.SelectedItem.ToString();
             bk.Incremental = false;
             if (checkBoxExpirationDate.Checked)
-                bk.ExpirationDate = monthCalendar1.SelectionStart;
+                bk.ExpirationDate = monthCalendar1.SelectionStart;//проверить региональные настройки пользователя в ssms default language en
             string path = string.Format($"{databaseName}_" +
                 $"{DateTime.Now.ToString("dd.MM.yyyy_HH-mm-ss")}" +
                 $".bak");
@@ -178,6 +176,32 @@ namespace databaseBackup
         private void buttonNewJob_Click(object sender, EventArgs e)
         {
             form2.ShowDialog();
+            RefreshJobs();
+        }
+
+        private void buttonDeleteJob_Click(object sender, EventArgs e)
+        {
+            string nameJob = (string)dataGridView1.CurrentRow.Cells["Column2"].Value;
+            Job job = dtbc.srv.JobServer.Jobs[nameJob];
+            job.Drop();
+            RefreshJobs();
+        }
+
+        private void buttonStartJob_Click(object sender, EventArgs e)
+        {
+            string nameJob = (string)dataGridView1.CurrentRow.Cells["Column2"].Value;
+            Job job = dtbc.srv.JobServer.Jobs[nameJob];
+            job.IsEnabled = true;
+            job.Start();
+            RefreshJobs();
+        }
+
+        private void buttonStopJob_Click(object sender, EventArgs e)
+        {
+            string nameJob = (string)dataGridView1.CurrentRow.Cells["Column2"].Value;
+            Job job = dtbc.srv.JobServer.Jobs[nameJob];
+            job.IsEnabled = false;
+            job.Stop();
             RefreshJobs();
         }
     }

@@ -59,12 +59,15 @@ namespace databaseBackup
             this.comboBoxdataBasesforRestore = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.buttonDeleteTask = new System.Windows.Forms.Button();
             this.buttonNewTask = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonStartJob = new System.Windows.Forms.Button();
+            this.buttonStopJob = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -214,7 +217,7 @@ namespace databaseBackup
             // 
             this.comboBoxNameServer.FormattingEnabled = true;
             this.comboBoxNameServer.Items.AddRange(new object[] {
-            "XENO-B-STATION"});
+            "DESKTOP-UOSK749"});
             this.comboBoxNameServer.Location = new System.Drawing.Point(117, 58);
             this.comboBoxNameServer.Name = "comboBoxNameServer";
             this.comboBoxNameServer.Size = new System.Drawing.Size(199, 21);
@@ -410,6 +413,9 @@ namespace databaseBackup
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.buttonStopJob);
+            this.groupBox4.Controls.Add(this.buttonStartJob);
+            this.groupBox4.Controls.Add(this.buttonDeleteTask);
             this.groupBox4.Controls.Add(this.buttonNewTask);
             this.groupBox4.Controls.Add(this.dataGridView1);
             this.groupBox4.Location = new System.Drawing.Point(18, 258);
@@ -420,6 +426,16 @@ namespace databaseBackup
             this.groupBox4.TabIndex = 16;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Расписание копирования";
+            // 
+            // buttonDeleteTask
+            // 
+            this.buttonDeleteTask.Location = new System.Drawing.Point(504, 72);
+            this.buttonDeleteTask.Name = "buttonDeleteTask";
+            this.buttonDeleteTask.Size = new System.Drawing.Size(137, 31);
+            this.buttonDeleteTask.TabIndex = 2;
+            this.buttonDeleteTask.Text = "Удалить задание";
+            this.buttonDeleteTask.UseVisualStyleBackColor = true;
+            this.buttonDeleteTask.Click += new System.EventHandler(this.buttonDeleteJob_Click);
             // 
             // buttonNewTask
             // 
@@ -464,6 +480,26 @@ namespace databaseBackup
             // 
             this.Column4.HeaderText = "DateCreated";
             this.Column4.Name = "Column4";
+            // 
+            // buttonStartJob
+            // 
+            this.buttonStartJob.Location = new System.Drawing.Point(504, 109);
+            this.buttonStartJob.Name = "buttonStartJob";
+            this.buttonStartJob.Size = new System.Drawing.Size(137, 33);
+            this.buttonStartJob.TabIndex = 3;
+            this.buttonStartJob.Text = "Запустить задание";
+            this.buttonStartJob.UseVisualStyleBackColor = true;
+            this.buttonStartJob.Click += new System.EventHandler(this.buttonStartJob_Click);
+            // 
+            // buttonStopJob
+            // 
+            this.buttonStopJob.Location = new System.Drawing.Point(504, 148);
+            this.buttonStopJob.Name = "buttonStopJob";
+            this.buttonStopJob.Size = new System.Drawing.Size(137, 38);
+            this.buttonStopJob.TabIndex = 4;
+            this.buttonStopJob.Text = "Остановить задание";
+            this.buttonStopJob.UseVisualStyleBackColor = true;
+            this.buttonStopJob.Click += new System.EventHandler(this.buttonStopJob_Click);
             // 
             // Form1
             // 
@@ -530,6 +566,9 @@ namespace databaseBackup
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button buttonDeleteTask;
+        private System.Windows.Forms.Button buttonStartJob;
+        private System.Windows.Forms.Button buttonStopJob;
     }
 }
 
