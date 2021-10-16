@@ -22,9 +22,24 @@ namespace databaseBackup
             InitializeComponent();
         }
 
-        private void CreateJob_Click(object sender, EventArgs e)
+        private void Form2_Load(object sender, EventArgs e)
         {
-            Job job = new Job(dtbc.srv.JobServer,JobName.Text);
+            comboBoxDataBases.Items.Clear();
+            foreach (Database item in dtbc.srv.Databases)
+            {
+                comboBoxDataBases.Items.Add(item.Name);
+            }
+        }
+
+        private void buttonCreateJob_Click(object sender, EventArgs e)
+        {
+            if (comboBoxDataBases.SelectedItem == null)
+            {
+                MessageBox.Show("Нужно выбрать базу данных");
+                return;
+            }
+
+            Job job = new Job(dtbc.srv.JobServer, JobName.Text);
             job.IsEnabled = true;
             job.Create();
             job.ApplyToTargetServer(dtbc.serverName);
@@ -34,12 +49,7 @@ namespace databaseBackup
             jobStep.OnSuccessAction = StepCompletionAction.GoToNextStep;
             jobStep.OnFailAction = StepCompletionAction.QuitWithFailure;
 
-            if(comboBoxDataBases.SelectedItem==null)
-            {
-                MessageBox.Show("Нужно выбрать базу данных");
-                return;
-            }
-
+            //директория бекапов по умолчанию
             string backupDirectory = dtbc.srv.BackupDirectory;
             // Вызов диалогового окна для выбора файла
             FolderBrowserDialog folderDlg = new FolderBrowserDialog();
@@ -55,7 +65,7 @@ namespace databaseBackup
             jobStep.Create();
             jbs = new JobSchedule(job, JobName.Text);
             jbs.ActiveStartDate = startDateTimeJob.Value;
-            if(radioButtonDaily.Checked)
+            if (radioButtonDaily.Checked)
             {
                 jbs.FrequencyTypes = FrequencyTypes.Daily;
                 jbs.FrequencySubDayTypes = FrequencySubDayTypes.Once;
@@ -64,16 +74,6 @@ namespace databaseBackup
             }
             jbs.Create();
             job.AddSharedSchedule(jbs.ID);
-            
-        }
-
-        private void Form2_Load(object sender, EventArgs e)
-        {
-            comboBoxDataBases.Items.Clear();
-            foreach (Database item in dtbc.srv.Databases)
-            {
-                comboBoxDataBases.Items.Add(item.Name);
-            }
         }
     }
 }

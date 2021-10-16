@@ -20,27 +20,14 @@ namespace databaseBackup
     public partial class Form1 : Form
     {
         Form2 form2;
-        //Создание объекта класса
         dataBaseClass dtbc = dataBaseClass.getInstance();
-        //BD bD = BD.getInstance();
-        //File file = new File();
         public Form1()
         {
             InitializeComponent();
             comboBoxNameServer.SelectedItem = comboBoxNameServer.Items[0];
             comboBoxAuthentication.SelectedItem = comboBoxAuthentication.Items[0];
             form2 = new Form2();
-            //string[] Parameters = file.ReadFileParametersBD();
-            //textBoxNameServer.Text = Parameters[0];
-            //textBoxNameUser.Text = Parameters[1];
-            //textBoxPass.Text = Parameters[2];
-            //textBoxNameBase.Text = Parameters[3];
-            ////Вызов метода подключения к базе данных, который находится в классе BD
-            //bD.Connection(Parameters[0], Parameters[1], Parameters[2]);
-            //timer1.Interval = 3600000;
-            //timer1.Start();
         }
-        //добавить во все списки существующие базы данных
         void addAllDatabasesToLists()
         {
             comboBoxdataBasesforBackup.Items.Clear();
@@ -59,7 +46,6 @@ namespace databaseBackup
             {
                 dtbc.srv = new Server(Server);
             }
-            //Считывание значений с textBoxs
             else
             {
                 string NameUser = textBoxNameUser.Text;
@@ -69,27 +55,10 @@ namespace databaseBackup
             }
             MessageBox.Show("Соединение установлено");
             addAllDatabasesToLists();
-            newJob_button.Enabled = true;
+            buttonNewTask.Enabled = true;
             RefreshJobs();
-            ////Вызов метода подключения к базе данных, который находится в классе BD
-            //bD.Connection(Server, NameUser, Pass);
         }
-        // Обработчик нажатия на кнопку Резервное копирование
-        public void checkCommand(int state)
-        {
-            switch (state)
-            {
-                case 0:
-                    MessageBox.Show("Резервное копирование завершено");
-                    break;
-                case 1:
-                    MessageBox.Show("Ошибка резервного копирования");
-                    break;
-                case 2:
-                    MessageBox.Show("Вы не подключены к Sql Server");
-                    break;
-            }
-        }
+
         private void buttonCopy_Click(object sender, EventArgs e)
         {
             string databaseName = textBoxNameBase.Text;
@@ -102,29 +71,14 @@ namespace databaseBackup
             bk.Incremental = false;
             if (checkBoxExpirationDate.Checked)
                 bk.ExpirationDate = monthCalendar1.SelectionStart;
-            BackupDeviceItem bdi = null;
-            DateTime dt = DateTime.Now;
-            string path = "";
-            path = string.Format($"{textBoxNameBase}_" +
+            string path = string.Format($"{databaseName}_" +
                 $"{DateTime.Now.ToString("dd.MM.yyyy_HH-mm-ss")}" +
                 $".bak");
-            bdi = new BackupDeviceItem(path, DeviceType.File);
+            BackupDeviceItem bdi = new BackupDeviceItem(path, DeviceType.File);
+            DateTime dt = DateTime.Now;
             bk.Devices.Add(bdi);
             bk.SqlBackup(dtbc.srv);
             bk.Devices.Remove(bdi);
-            //    // Считывание значения из textBox
-            //    string NameBase = textBoxNameBase.Text;
-            //    // Вызов диалогового окна для выбора файла
-            //    FolderBrowserDialog folderDlg = new FolderBrowserDialog();
-            //    folderDlg.ShowNewFolderButton = true;
-            //    DialogResult result = folderDlg.ShowDialog();
-            //    if (result == DialogResult.OK)
-            //    {
-            //        // Присваивание переменной пути до файла
-            //        string Directory = folderDlg.SelectedPath;
-            //        // Обработчик исходов резервного копирования
-            //        checkCommand(bD.Backups(NameBase, Directory));
-            //    }
         }
         private void RestorePercent_Completed(object sender, PercentCompleteEventArgs e)
         {
@@ -148,12 +102,12 @@ namespace databaseBackup
                 MessageBox.Show(e.Error.Message);
             }
         }
-        // Обработчик нажатия на кнопку Выбрать файл
         private void buttonRecovery_Click(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            OpenFileDialog OPF = new OpenFileDialog();
+            if (OPF.ShowDialog() == DialogResult.OK)
             {
-                string filePath = openFileDialog1.FileName;
+                string filePath = OPF.FileName;
                 string databaseName = textBoxNewDatabase.Text;
 
                 Restore restore = new Restore();
@@ -191,108 +145,10 @@ namespace databaseBackup
                 }
             }
         }
-        //// Открытие диалогового окна
-        //OpenFileDialog OPF = new OpenFileDialog();
-        //if (OPF.ShowDialog() == DialogResult.OK)
-        //{
-        //    // Контроль выбора файла формата .bak
-        //    if (OPF.FileName.Substring(OPF.FileName.Length - 3, 3) != "bak")
-        //    {
-        //        MessageBox.Show("Вы не выбрали .bak файл");
-        //    }
-        //    else
-        //    {
-        //        // Отработка метода восстановления базы данных и возвращения исхода
-        //        checkCommand(bD.Recovery(OPF.FileName,textBoxNameBase.Text));
-        //    }
-        //}
-        private void buttonSaveInterval_Click(object sender, EventArgs e)
-        {
-            //string[] Parameters = file.ReadFileParametersBD();
-            //bD.Backups(Parameters[3], Application.StartupPath.ToString());
-            //file.WriteFileIntervalSave(comboBox1.SelectedIndex, DateTime.Now);
-        }
-        public void PlanCopy()
-        {
-            //string[] ParametersInterval = file.ReadFileIntervalSave();
-            //string[] Parameters = file.ReadFileParametersBD();
-            //TimeSpan interval = DateTime.Now.Subtract(DateTime.Parse(ParametersInterval[1]));
-            //switch (int.Parse(ParametersInterval[0]))
-            //{
-            //    case 0:
-            //        if (interval >= TimeSpan.FromHours(1))
-            //        {
-            //            bD.Backups(Parameters[3], Application.StartupPath.ToString());
-            //            file.WriteFileIntervalSave(0, DateTime.Now);
-            //        }
-            //        break;
-            //    case 1:
-            //        if (interval >= TimeSpan.FromHours(3))
-            //        {
-            //            bD.Backups(Parameters[3], Application.StartupPath.ToString());
-            //            file.WriteFileIntervalSave(0, DateTime.Now);
-            //        }
-            //        break;
-            //    case 2:
-            //        if (interval >= TimeSpan.FromHours(6))
-            //        {
-            //            bD.Backups(Parameters[3], Application.StartupPath.ToString());
-            //            file.WriteFileIntervalSave(0, DateTime.Now);
-            //        }
-            //        break;
-            //    case 3:
-            //        if (interval >= TimeSpan.FromHours(12))
-            //        {
-            //            bD.Backups(Parameters[3], Application.StartupPath.ToString());
-            //            file.WriteFileIntervalSave(0, DateTime.Now);
-            //        }
-            //        break;
-            //    case 4:
-            //        if (interval >= TimeSpan.FromDays(1))
-            //        {
-            //            bD.Backups(Parameters[3], Application.StartupPath.ToString());
-            //            file.WriteFileIntervalSave(0, DateTime.Now);
-            //        }
-            //        break;
-            //    case 5:
-            //        if (interval >= TimeSpan.FromDays(7))
-            //        {
-            //            bD.Backups(Parameters[3], Application.StartupPath.ToString());
-            //            file.WriteFileIntervalSave(0, DateTime.Now);
-            //        }
-            //        break;
-            //    case 6:
-            //        if (interval >= TimeSpan.FromDays(30))
-            //        {
-            //            bD.Backups(Parameters[3], Application.StartupPath.ToString());
-            //            file.WriteFileIntervalSave(0, DateTime.Now);
-            //        }
-            //        break;
-            //}
-        }
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            PlanCopy();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBoxLife_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void comboBoxdataBasesforBackup_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBoxNameBase.Text = comboBoxdataBasesforBackup.SelectedItem.ToString();
-        }
-
-        private void comboBoxNameServer_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void radioButtonToOldDatabase_CheckedChanged(object sender, EventArgs e)
@@ -312,16 +168,17 @@ namespace databaseBackup
             else textBoxNameUser.Enabled = textBoxPass.Enabled = true;
         }
 
-        private void newJob_button_Click(object sender, EventArgs e)
-        {
-            form2.ShowDialog();
-            RefreshJobs();
-        }
         public void RefreshJobs()
         {
             dataGridView1.Rows.Clear();
             foreach (Job item in dtbc.srv.JobServer.Jobs)
                 dataGridView1.Rows.Add(item.JobID, item.Name, item.IsEnabled, item.DateCreated);
+        }
+
+        private void buttonNewJob_Click(object sender, EventArgs e)
+        {
+            form2.ShowDialog();
+            RefreshJobs();
         }
     }
 }

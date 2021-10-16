@@ -31,7 +31,7 @@ namespace databaseBackup
         {
             this.comboBoxDataBases = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.CreateJob = new System.Windows.Forms.Button();
+            this.buttonCreateJob = new System.Windows.Forms.Button();
             this.JobName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.startDateTimeJob = new System.Windows.Forms.DateTimePicker();
@@ -60,15 +60,15 @@ namespace databaseBackup
             this.label1.TabIndex = 1;
             this.label1.Text = "Базы данных";
             // 
-            // CreateJob
+            // buttonCreateJob
             // 
-            this.CreateJob.Location = new System.Drawing.Point(117, 200);
-            this.CreateJob.Name = "CreateJob";
-            this.CreateJob.Size = new System.Drawing.Size(117, 23);
-            this.CreateJob.TabIndex = 2;
-            this.CreateJob.Text = "Создать задание";
-            this.CreateJob.UseVisualStyleBackColor = true;
-            this.CreateJob.Click += new System.EventHandler(this.CreateJob_Click);
+            this.buttonCreateJob.Location = new System.Drawing.Point(117, 200);
+            this.buttonCreateJob.Name = "buttonCreateJob";
+            this.buttonCreateJob.Size = new System.Drawing.Size(117, 23);
+            this.buttonCreateJob.TabIndex = 2;
+            this.buttonCreateJob.Text = "Создать задание";
+            this.buttonCreateJob.UseVisualStyleBackColor = true;
+            this.buttonCreateJob.Click += new System.EventHandler(this.buttonCreateJob_Click);
             // 
             // JobName
             // 
@@ -157,7 +157,7 @@ namespace databaseBackup
             this.Controls.Add(this.startDateTimeJob);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.JobName);
-            this.Controls.Add(this.CreateJob);
+            this.Controls.Add(this.buttonCreateJob);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBoxDataBases);
             this.Name = "Form2";
@@ -174,7 +174,7 @@ namespace databaseBackup
 
         private System.Windows.Forms.ComboBox comboBoxDataBases;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button CreateJob;
+        private System.Windows.Forms.Button buttonCreateJob;
         private System.Windows.Forms.TextBox JobName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker startDateTimeJob;

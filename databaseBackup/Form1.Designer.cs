@@ -29,7 +29,6 @@ namespace databaseBackup
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.buttonConnect = new System.Windows.Forms.Button();
             this.buttonCopy = new System.Windows.Forms.Button();
             this.labelHelp = new System.Windows.Forms.Label();
@@ -39,6 +38,7 @@ namespace databaseBackup
             this.labelNameUser = new System.Windows.Forms.Label();
             this.labelPass = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.comboBoxAuthentication = new System.Windows.Forms.ComboBox();
             this.comboBoxNameServer = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -48,7 +48,6 @@ namespace databaseBackup
             this.label1 = new System.Windows.Forms.Label();
             this.checkBoxExpirationDate = new System.Windows.Forms.CheckBox();
             this.comboBoxdataBasesforBackup = new System.Windows.Forms.ComboBox();
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -59,16 +58,13 @@ namespace databaseBackup
             this.label2 = new System.Windows.Forms.Label();
             this.comboBoxdataBasesforRestore = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.newJob_button = new System.Windows.Forms.Button();
+            this.buttonNewTask = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -190,6 +186,18 @@ namespace databaseBackup
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Параметры подключения";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label6.ForeColor = System.Drawing.Color.Maroon;
+            this.label6.Location = new System.Drawing.Point(3, 30);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(94, 13);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "Аутентификация:";
+            // 
             // comboBoxAuthentication
             // 
             this.comboBoxAuthentication.FormattingEnabled = true;
@@ -211,7 +219,6 @@ namespace databaseBackup
             this.comboBoxNameServer.Name = "comboBoxNameServer";
             this.comboBoxNameServer.Size = new System.Drawing.Size(199, 21);
             this.comboBoxNameServer.TabIndex = 17;
-            this.comboBoxNameServer.SelectedIndexChanged += new System.EventHandler(this.comboBoxNameServer_SelectedIndexChanged);
             // 
             // groupBox2
             // 
@@ -278,7 +285,6 @@ namespace databaseBackup
             this.checkBoxExpirationDate.TabIndex = 19;
             this.checkBoxExpirationDate.Text = "срок хранения";
             this.checkBoxExpirationDate.UseVisualStyleBackColor = true;
-            this.checkBoxExpirationDate.CheckedChanged += new System.EventHandler(this.checkBoxLife_CheckedChanged);
             // 
             // comboBoxdataBasesforBackup
             // 
@@ -402,13 +408,9 @@ namespace databaseBackup
             this.label4.TabIndex = 23;
             this.label4.Text = "Базы данных";
             // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.newJob_button);
+            this.groupBox4.Controls.Add(this.buttonNewTask);
             this.groupBox4.Controls.Add(this.dataGridView1);
             this.groupBox4.Location = new System.Drawing.Point(18, 258);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
@@ -419,16 +421,16 @@ namespace databaseBackup
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Расписание копирования";
             // 
-            // newJob_button
+            // buttonNewTask
             // 
-            this.newJob_button.Enabled = false;
-            this.newJob_button.Location = new System.Drawing.Point(504, 32);
-            this.newJob_button.Name = "newJob_button";
-            this.newJob_button.Size = new System.Drawing.Size(137, 34);
-            this.newJob_button.TabIndex = 1;
-            this.newJob_button.Text = "Создать задание";
-            this.newJob_button.UseVisualStyleBackColor = true;
-            this.newJob_button.Click += new System.EventHandler(this.newJob_button_Click);
+            this.buttonNewTask.Enabled = false;
+            this.buttonNewTask.Location = new System.Drawing.Point(504, 32);
+            this.buttonNewTask.Name = "buttonNewTask";
+            this.buttonNewTask.Size = new System.Drawing.Size(137, 34);
+            this.buttonNewTask.TabIndex = 1;
+            this.buttonNewTask.Text = "Создать задание";
+            this.buttonNewTask.UseVisualStyleBackColor = true;
+            this.buttonNewTask.Click += new System.EventHandler(this.buttonNewJob_Click);
             // 
             // dataGridView1
             // 
@@ -463,23 +465,6 @@ namespace databaseBackup
             this.Column4.HeaderText = "DateCreated";
             this.Column4.Name = "Column4";
             // 
-            // timer1
-            // 
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.ForeColor = System.Drawing.Color.Maroon;
-            this.label6.Location = new System.Drawing.Point(3, 30);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(94, 13);
-            this.label6.TabIndex = 19;
-            this.label6.Text = "Аутентификация:";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -494,7 +479,6 @@ namespace databaseBackup
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Копирование/восстановление";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -522,13 +506,10 @@ namespace databaseBackup
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox textBoxNameBase;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button buttonRecovery;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ComboBox comboBoxNameServer;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboBoxdataBasesforBackup;
@@ -542,7 +523,7 @@ namespace databaseBackup
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox comboBoxAuthentication;
-        private System.Windows.Forms.Button newJob_button;
+        private System.Windows.Forms.Button buttonNewTask;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
