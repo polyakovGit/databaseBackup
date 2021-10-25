@@ -16,7 +16,7 @@ namespace databaseBackup
     public partial class Form2 : Form
     {
         JobSchedule jbs;
-        dataBaseClass dtbc = dataBaseClass.getInstance();
+        DataBase dtb = DataBase.getInstance();
         public Form2()
         {
             InitializeComponent();
@@ -25,7 +25,7 @@ namespace databaseBackup
         private void Form2_Load(object sender, EventArgs e)
         {
             comboBoxDataBases.Items.Clear();
-            foreach (Database item in dtbc.srv.Databases)
+            foreach (Database item in dtb.srv.Databases)
             {
                 comboBoxDataBases.Items.Add(item.Name);
             }
@@ -39,10 +39,10 @@ namespace databaseBackup
                 return;
             }
 
-            Job job = new Job(dtbc.srv.JobServer, JobName.Text);
+            Job job = new Job(dtb.srv.JobServer, JobName.Text);
             job.IsEnabled = true;
             job.Create();
-            job.ApplyToTargetServer(dtbc.serverName);
+            job.ApplyToTargetServer(dtb.serverName);
             JobStep jobStep = new JobStep(job, "auto backups");
             jobStep.SubSystem = AgentSubSystem.PowerShell;
             jobStep.DatabaseName = "dataBaseTest";
@@ -50,7 +50,7 @@ namespace databaseBackup
             jobStep.OnFailAction = StepCompletionAction.QuitWithFailure;
 
             //директория бекапов по умолчанию
-            string backupDirectory = dtbc.srv.BackupDirectory;
+            string backupDirectory = dtb.srv.BackupDirectory;
             // Вызов диалогового окна для выбора файла
             FolderBrowserDialog folderDlg = new FolderBrowserDialog();
             folderDlg.ShowNewFolderButton = true;
@@ -61,7 +61,7 @@ namespace databaseBackup
                 backupDirectory = folderDlg.SelectedPath;
             }
             //полный бекап
-            jobStep.Command = dtbc.Backups(comboBoxDataBases.Text, backupDirectory);
+            jobStep.Command = dtb.Backups(comboBoxDataBases.Text, backupDirectory);
             jobStep.Create();
             jbs = new JobSchedule(job, JobName.Text);
             jbs.ActiveStartDate = startDateTimeJob.Value;

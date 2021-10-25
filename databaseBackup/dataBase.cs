@@ -9,15 +9,15 @@ using Microsoft.SqlServer.Management.Common;
 
 namespace databaseBackup
 {
-    class dataBaseClass
+    class DataBase
     {
-        private static dataBaseClass instance;
-        private dataBaseClass() { }
+        private static DataBase instance;
+        private DataBase() { }
 
-        public static dataBaseClass getInstance()
+        public static DataBase getInstance()
         {
             if (instance == null)
-                instance = new dataBaseClass();
+                instance = new DataBase();
             return instance;
         }
         public ServerConnection srvConn;

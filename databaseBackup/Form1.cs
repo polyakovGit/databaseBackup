@@ -18,7 +18,7 @@ namespace databaseBackup
     public partial class Form1 : Form
     {
         Form2 form2;
-        dataBaseClass dtbc = dataBaseClass.getInstance();
+        DataBase dtb = DataBase.getInstance();
         public Form1()
         {
             InitializeComponent();
@@ -30,7 +30,7 @@ namespace databaseBackup
         {
             comboBoxdataBasesforBackup.Items.Clear();
             comboBoxdataBasesforRestore.Items.Clear();
-            foreach (Database item in dtbc.srv.Databases)
+            foreach (Database item in dtb.srv.Databases)
             {
                 comboBoxdataBasesforBackup.Items.Add(item.Name);
                 comboBoxdataBasesforRestore.Items.Add(item.Name);
@@ -39,17 +39,17 @@ namespace databaseBackup
         private void buttonConnect_Click(object sender, EventArgs e)
         {
             string Server = comboBoxNameServer.Text;
-            dtbc.serverName = Server;
+            dtb.serverName = Server;
             if (comboBoxAuthentication.SelectedIndex == 0)
             {
-                dtbc.srv = new Server(Server);
+                dtb.srv = new Server(Server);
             }
             else
             {
                 string NameUser = textBoxNameUser.Text;
                 string Pass = textBoxPass.Text;
-                dtbc.srvConn = new ServerConnection(Server, NameUser, Pass);
-                dtbc.srv = new Server(dtbc.srvConn);
+                dtb.srvConn = new ServerConnection(Server, NameUser, Pass);
+                dtb.srv = new Server(dtb.srvConn);
             }
             MessageBox.Show("Соединение установлено");
             addAllDatabasesToLists();
@@ -75,7 +75,7 @@ namespace databaseBackup
             BackupDeviceItem bdi = new BackupDeviceItem(path, DeviceType.File);
             DateTime dt = DateTime.Now;
             bk.Devices.Add(bdi);
-            bk.SqlBackup(dtbc.srv);
+            bk.SqlBackup(dtb.srv);
             bk.Devices.Remove(bdi);
         }
         private void RestorePercent_Completed(object sender, PercentCompleteEventArgs e)
@@ -122,23 +122,23 @@ namespace databaseBackup
                     if (comboBoxdataBasesforRestore.Text != null)
                     {
                         string db = comboBoxdataBasesforRestore.Text;
-                        currentDb = dtbc.srv.Databases[db];
+                        currentDb = dtb.srv.Databases[db];
                         if (currentDb != null)
                         {
-                            dtbc.srv.KillAllProcesses(currentDb.Name);
+                            dtb.srv.KillAllProcesses(currentDb.Name);
                         }
                         restore.Database = db;
                         restore.Devices.Add(bdi);
-                        restore.SqlRestore(dtbc.srv);
+                        restore.SqlRestore(dtb.srv);
                         addAllDatabasesToLists();
                     }
                 }
                 else
                 {
-                    Database newDb = new Database(dtbc.srv, textBoxNewDatabase.Text);
+                    Database newDb = new Database(dtb.srv, textBoxNewDatabase.Text);
                     restore.Database = newDb.Name;
                     restore.Devices.Add(bdi);
-                    restore.SqlRestoreAsync(dtbc.srv);
+                    restore.SqlRestoreAsync(dtb.srv);
                     addAllDatabasesToLists();
                 }
             }
@@ -169,7 +169,7 @@ namespace databaseBackup
         public void RefreshJobs()
         {
             dataGridView1.Rows.Clear();
-            foreach (Job item in dtbc.srv.JobServer.Jobs)
+            foreach (Job item in dtb.srv.JobServer.Jobs)
                 dataGridView1.Rows.Add(item.JobID, item.Name, item.IsEnabled, item.DateCreated);
         }
 
@@ -182,7 +182,7 @@ namespace databaseBackup
         private void buttonDeleteJob_Click(object sender, EventArgs e)
         {
             string nameJob = (string)dataGridView1.CurrentRow.Cells["Column2"].Value;
-            Job job = dtbc.srv.JobServer.Jobs[nameJob];
+            Job job = dtb.srv.JobServer.Jobs[nameJob];
             job.Drop();
             RefreshJobs();
         }
@@ -190,7 +190,7 @@ namespace databaseBackup
         private void buttonStartJob_Click(object sender, EventArgs e)
         {
             string nameJob = (string)dataGridView1.CurrentRow.Cells["Column2"].Value;
-            Job job = dtbc.srv.JobServer.Jobs[nameJob];
+            Job job = dtb.srv.JobServer.Jobs[nameJob];
             job.IsEnabled = true;
             job.Start();
             RefreshJobs();
@@ -199,7 +199,7 @@ namespace databaseBackup
         private void buttonStopJob_Click(object sender, EventArgs e)
         {
             string nameJob = (string)dataGridView1.CurrentRow.Cells["Column2"].Value;
-            Job job = dtbc.srv.JobServer.Jobs[nameJob];
+            Job job = dtb.srv.JobServer.Jobs[nameJob];
             job.IsEnabled = false;
             job.Stop();
             RefreshJobs();
