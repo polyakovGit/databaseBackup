@@ -195,7 +195,8 @@ namespace databaseBackup
             string nameJob = (string)dataGridView1.CurrentRow.Cells["Column2"].Value;
             Job job = dtb.srv.JobServer.Jobs[nameJob];
             job.IsEnabled = true;
-            job.Start();
+            job.Alter();
+            job.Refresh();
             RefreshJobs();
         }
 
@@ -204,7 +205,8 @@ namespace databaseBackup
             string nameJob = (string)dataGridView1.CurrentRow.Cells["Column2"].Value;
             Job job = dtb.srv.JobServer.Jobs[nameJob];
             job.IsEnabled = false;
-            job.Stop();
+            job.Alter();
+            job.Refresh();
             RefreshJobs();
         }
 
