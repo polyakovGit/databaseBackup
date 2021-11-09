@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.SqlServer.Management.Smo;
 using Microsoft.SqlServer.Management.Smo.Agent;
+using Microsoft.SqlServer.Management.Smo.Mail;
 using Microsoft.SqlServer.Management.Common;
 using MimeKit;
 using MailKit.Net.Smtp;
@@ -210,20 +211,7 @@ namespace databaseBackup
             RefreshJobs();
         }
 
-        private void buttonSaveNotification_Click(object sender, EventArgs e)
-        {
-            Operator myOperator = new Operator(dtb.srv.JobServer, textBoxNameOperator.Text);
-            myOperator.EmailAddress = textBoxEmail.Text;
-            myOperator.Enabled = true;
-            myOperator.Create();
-            
-            Alert myAlert = new Alert(dtb.srv.JobServer, textBoxNotificationName.Text);
-            myAlert.Severity = 19;
-            myAlert.NotificationMessage = "test";
-            myAlert.Create();
-            myAlert.AddNotification(myOperator.Name, NotifyMethods.NotifyEmail);
-        }
-
+        //для ручного бекапа 
         //public async Task SendMessage(string toEmail, string title, string message)
         //{
         //    MimeMessage myMessage = new MimeMessage();

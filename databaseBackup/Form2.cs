@@ -40,7 +40,15 @@ namespace databaseBackup
             }
 
             Job job = new Job(dtb.srv.JobServer, JobName.Text);
+
+
+            string operatorName; //"textName"
+            if (textBoxNameOperator.Text == null)
+                operatorName = "textName";
+            else operatorName = textBoxNameOperator.Text;
+            job.OperatorToEmail = operatorName;
             job.EmailLevel = CompletionAction.Always;
+            
             job.IsEnabled = true;
             job.Create();
             job.ApplyToTargetServer(dtb.serverName);
@@ -50,17 +58,20 @@ namespace databaseBackup
             jobStep.OnSuccessAction = StepCompletionAction.GoToNextStep;
             jobStep.OnFailAction = StepCompletionAction.QuitWithFailure;
 
+            
+
             //директория бекапов по умолчанию
             string backupDirectory = dtb.srv.BackupDirectory;
+
             // Вызов диалогового окна для выбора файла
-            FolderBrowserDialog folderDlg = new FolderBrowserDialog();
-            folderDlg.ShowNewFolderButton = true;
-            DialogResult result = folderDlg.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                // Присваивание переменной пути до файла
-                backupDirectory = folderDlg.SelectedPath;
-            }
+            //FolderBrowserDialog folderDlg = new FolderBrowserDialog();
+            //folderDlg.ShowNewFolderButton = true;
+            //DialogResult result = folderDlg.ShowDialog();
+            //if (result == DialogResult.OK)
+            //{
+            //    // Присваивание переменной пути до файла
+            //    backupDirectory = folderDlg.SelectedPath;
+            //}
             //полный бекап
             jobStep.Command = dtb.Backups(comboBoxDataBases.Text, backupDirectory);
             jobStep.Create();
@@ -75,6 +86,24 @@ namespace databaseBackup
             }
             jbs.Create();
             job.AddSharedSchedule(jbs.ID);
+        }
+
+        private void buttonSaveNotification_Click(object sender, EventArgs e)
+        {
+            Operator myOperator = new Operator(dtb.srv.JobServer, textBoxNameOperator.Text);
+            myOperator.EmailAddress = textBoxEmail.Text;
+            myOperator.Enabled = true;
+            myOperator.Create();
+            myOperator.AddNotification(myOperator.Name, NotifyMethods.NotifyEmail);
+
+
+            Alert myAlert = new Alert(dtb.srv.JobServer, textBoxNotificationName.Text);
+            myAlert.Severity = 19;
+            myAlert.NotificationMessage = "test";
+            myAlert.Create();
+            myAlert.AddNotification(myOperator.Name, NotifyMethods.NotifyEmail);
+
+
         }
     }
 }

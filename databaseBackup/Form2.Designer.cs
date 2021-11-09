@@ -40,13 +40,24 @@ namespace databaseBackup
             this.daily = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.radioButtonDaily = new System.Windows.Forms.RadioButton();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.buttonSaveNotification = new System.Windows.Forms.Button();
+            this.textBoxNameOperator = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBoxEmail = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBoxNotificationName = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBoxDataBases
             // 
             this.comboBoxDataBases.FormattingEnabled = true;
-            this.comboBoxDataBases.Location = new System.Drawing.Point(117, 6);
+            this.comboBoxDataBases.Location = new System.Drawing.Point(111, 13);
             this.comboBoxDataBases.Name = "comboBoxDataBases";
             this.comboBoxDataBases.Size = new System.Drawing.Size(133, 21);
             this.comboBoxDataBases.TabIndex = 0;
@@ -54,7 +65,7 @@ namespace databaseBackup
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(6, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(74, 13);
             this.label1.TabIndex = 1;
@@ -62,7 +73,7 @@ namespace databaseBackup
             // 
             // buttonCreateJob
             // 
-            this.buttonCreateJob.Location = new System.Drawing.Point(117, 200);
+            this.buttonCreateJob.Location = new System.Drawing.Point(139, 603);
             this.buttonCreateJob.Name = "buttonCreateJob";
             this.buttonCreateJob.Size = new System.Drawing.Size(117, 23);
             this.buttonCreateJob.TabIndex = 2;
@@ -72,7 +83,7 @@ namespace databaseBackup
             // 
             // JobName
             // 
-            this.JobName.Location = new System.Drawing.Point(120, 40);
+            this.JobName.Location = new System.Drawing.Point(114, 47);
             this.JobName.Name = "JobName";
             this.JobName.Size = new System.Drawing.Size(130, 20);
             this.JobName.TabIndex = 3;
@@ -80,7 +91,7 @@ namespace databaseBackup
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 40);
+            this.label2.Location = new System.Drawing.Point(6, 47);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(102, 13);
             this.label2.TabIndex = 4;
@@ -89,7 +100,7 @@ namespace databaseBackup
             // startDateTimeJob
             // 
             this.startDateTimeJob.CustomFormat = "";
-            this.startDateTimeJob.Location = new System.Drawing.Point(117, 68);
+            this.startDateTimeJob.Location = new System.Drawing.Point(111, 75);
             this.startDateTimeJob.MinDate = new System.DateTime(2021, 10, 13, 0, 0, 0, 0);
             this.startDateTimeJob.Name = "startDateTimeJob";
             this.startDateTimeJob.Size = new System.Drawing.Size(133, 20);
@@ -98,7 +109,7 @@ namespace databaseBackup
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 74);
+            this.label3.Location = new System.Drawing.Point(6, 81);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 13);
             this.label3.TabIndex = 6;
@@ -109,9 +120,9 @@ namespace databaseBackup
             this.groupBox1.Controls.Add(this.daily);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.radioButtonDaily);
-            this.groupBox1.Location = new System.Drawing.Point(288, 6);
+            this.groupBox1.Location = new System.Drawing.Point(12, 150);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(279, 215);
+            this.groupBox1.Size = new System.Drawing.Size(391, 215);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Расписание бекапов";
@@ -147,26 +158,113 @@ namespace databaseBackup
             this.radioButtonDaily.Text = "Ежедневно";
             this.radioButtonDaily.UseVisualStyleBackColor = true;
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.buttonSaveNotification);
+            this.groupBox5.Controls.Add(this.textBoxNameOperator);
+            this.groupBox5.Controls.Add(this.label9);
+            this.groupBox5.Controls.Add(this.textBoxEmail);
+            this.groupBox5.Controls.Add(this.label8);
+            this.groupBox5.Controls.Add(this.label7);
+            this.groupBox5.Controls.Add(this.textBoxNotificationName);
+            this.groupBox5.Location = new System.Drawing.Point(12, 371);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(391, 216);
+            this.groupBox5.TabIndex = 18;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Уведомления";
+            // 
+            // buttonSaveNotification
+            // 
+            this.buttonSaveNotification.Location = new System.Drawing.Point(137, 160);
+            this.buttonSaveNotification.Name = "buttonSaveNotification";
+            this.buttonSaveNotification.Size = new System.Drawing.Size(146, 23);
+            this.buttonSaveNotification.TabIndex = 6;
+            this.buttonSaveNotification.Text = "Сохранить уведомление";
+            this.buttonSaveNotification.UseVisualStyleBackColor = true;
+            // 
+            // textBoxNameOperator
+            // 
+            this.textBoxNameOperator.Location = new System.Drawing.Point(140, 106);
+            this.textBoxNameOperator.Name = "textBoxNameOperator";
+            this.textBoxNameOperator.Size = new System.Drawing.Size(112, 20);
+            this.textBoxNameOperator.TabIndex = 5;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 106);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(89, 13);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "Имя получателя";
+            // 
+            // textBoxEmail
+            // 
+            this.textBoxEmail.Location = new System.Drawing.Point(140, 69);
+            this.textBoxEmail.Name = "textBoxEmail";
+            this.textBoxEmail.Size = new System.Drawing.Size(188, 20);
+            this.textBoxEmail.TabIndex = 3;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 69);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(128, 13);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "Почта для уведомлений";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 29);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(127, 13);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "Название уведомления";
+            // 
+            // textBoxNotificationName
+            // 
+            this.textBoxNotificationName.Location = new System.Drawing.Point(139, 26);
+            this.textBoxNotificationName.Name = "textBoxNotificationName";
+            this.textBoxNotificationName.Size = new System.Drawing.Size(113, 20);
+            this.textBoxNotificationName.TabIndex = 0;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.comboBoxDataBases);
+            this.groupBox2.Controls.Add(this.JobName);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.startDateTimeJob);
+            this.groupBox2.Location = new System.Drawing.Point(12, 15);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(391, 120);
+            this.groupBox2.TabIndex = 19;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "groupBox2";
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(612, 258);
+            this.ClientSize = new System.Drawing.Size(416, 651);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.startDateTimeJob);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.JobName);
             this.Controls.Add(this.buttonCreateJob);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBoxDataBases);
             this.Name = "Form2";
             this.Text = "Создание задачи";
             this.Load += new System.EventHandler(this.Form2_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -183,5 +281,14 @@ namespace databaseBackup
         private System.Windows.Forms.DateTimePicker daily;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RadioButton radioButtonDaily;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button buttonSaveNotification;
+        private System.Windows.Forms.TextBox textBoxNameOperator;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textBoxEmail;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBoxNotificationName;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }
