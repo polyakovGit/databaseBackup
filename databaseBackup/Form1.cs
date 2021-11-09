@@ -12,6 +12,9 @@ using System.Windows.Forms;
 using Microsoft.SqlServer.Management.Smo;
 using Microsoft.SqlServer.Management.Smo.Agent;
 using Microsoft.SqlServer.Management.Common;
+using MimeKit;
+using MailKit.Net.Smtp;
+
 
 namespace databaseBackup
 {
@@ -204,5 +207,38 @@ namespace databaseBackup
             job.Stop();
             RefreshJobs();
         }
+
+        private void buttonSaveNotification_Click(object sender, EventArgs e)
+        {
+            Operator myOperator = new Operator(dtb.srv.JobServer, textBoxNameOperator.Text);
+            myOperator.EmailAddress = textBoxEmail.Text;
+            myOperator.Enabled = true;
+            myOperator.Create();
+            
+            Alert myAlert = new Alert(dtb.srv.JobServer, textBoxNotificationName.Text);
+            myAlert.Severity = 19;
+            myAlert.NotificationMessage = "test";
+            myAlert.Create();
+            myAlert.AddNotification(myOperator.Name, NotifyMethods.NotifyEmail);
+        }
+
+        //public async Task SendMessage(string toEmail, string title, string message)
+        //{
+        //    MimeMessage myMessage = new MimeMessage();
+        //    myMessage.From.Add(new MailboxAddress("testNameFrom","polyakovmymail@gmail.com"));
+        //    myMessage.To.Add(new MailboxAddress("testNameTo",toEmail));
+        //    myMessage.Subject = title;
+        //    myMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
+        //    {
+        //        Text = message
+        //    };
+        //    using (SmtpClient mySmtpClient=new SmtpClient())
+        //    {
+        //        await mySmtpClient.ConnectAsync("smtp.gmail.com", 465, false);
+        //        await mySmtpClient.AuthenticateAsync("polyakovmymail@gmail.com", "passValue");
+        //        await mySmtpClient.SendAsync(myMessage);
+        //        await mySmtpClient.DisconnectAsync(true);
+        //    }
+        //}
     }
 }

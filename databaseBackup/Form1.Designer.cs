@@ -59,6 +59,8 @@ namespace databaseBackup
             this.comboBoxdataBasesforRestore = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.buttonStopJob = new System.Windows.Forms.Button();
+            this.buttonStartJob = new System.Windows.Forms.Button();
             this.buttonDeleteTask = new System.Windows.Forms.Button();
             this.buttonNewTask = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -66,13 +68,20 @@ namespace databaseBackup
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonStartJob = new System.Windows.Forms.Button();
-            this.buttonStopJob = new System.Windows.Forms.Button();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.textBoxNotificationName = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBoxEmail = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBoxNameOperator = new System.Windows.Forms.TextBox();
+            this.buttonSaveNotification = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonConnect
@@ -315,7 +324,7 @@ namespace databaseBackup
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(298, 208);
+            this.groupBox3.Size = new System.Drawing.Size(295, 208);
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Восстановление базы данных";
@@ -427,6 +436,26 @@ namespace databaseBackup
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Расписание копирования";
             // 
+            // buttonStopJob
+            // 
+            this.buttonStopJob.Location = new System.Drawing.Point(504, 148);
+            this.buttonStopJob.Name = "buttonStopJob";
+            this.buttonStopJob.Size = new System.Drawing.Size(137, 38);
+            this.buttonStopJob.TabIndex = 4;
+            this.buttonStopJob.Text = "Остановить задание";
+            this.buttonStopJob.UseVisualStyleBackColor = true;
+            this.buttonStopJob.Click += new System.EventHandler(this.buttonStopJob_Click);
+            // 
+            // buttonStartJob
+            // 
+            this.buttonStartJob.Location = new System.Drawing.Point(504, 109);
+            this.buttonStartJob.Name = "buttonStartJob";
+            this.buttonStartJob.Size = new System.Drawing.Size(137, 33);
+            this.buttonStartJob.TabIndex = 3;
+            this.buttonStartJob.Text = "Запустить задание";
+            this.buttonStartJob.UseVisualStyleBackColor = true;
+            this.buttonStartJob.Click += new System.EventHandler(this.buttonStartJob_Click);
+            // 
             // buttonDeleteTask
             // 
             this.buttonDeleteTask.Location = new System.Drawing.Point(504, 72);
@@ -481,31 +510,86 @@ namespace databaseBackup
             this.Column4.HeaderText = "DateCreated";
             this.Column4.Name = "Column4";
             // 
-            // buttonStartJob
+            // groupBox5
             // 
-            this.buttonStartJob.Location = new System.Drawing.Point(504, 109);
-            this.buttonStartJob.Name = "buttonStartJob";
-            this.buttonStartJob.Size = new System.Drawing.Size(137, 33);
-            this.buttonStartJob.TabIndex = 3;
-            this.buttonStartJob.Text = "Запустить задание";
-            this.buttonStartJob.UseVisualStyleBackColor = true;
-            this.buttonStartJob.Click += new System.EventHandler(this.buttonStartJob_Click);
+            this.groupBox5.Controls.Add(this.buttonSaveNotification);
+            this.groupBox5.Controls.Add(this.textBoxNameOperator);
+            this.groupBox5.Controls.Add(this.label9);
+            this.groupBox5.Controls.Add(this.textBoxEmail);
+            this.groupBox5.Controls.Add(this.label8);
+            this.groupBox5.Controls.Add(this.label7);
+            this.groupBox5.Controls.Add(this.textBoxNotificationName);
+            this.groupBox5.Location = new System.Drawing.Point(721, 261);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(388, 216);
+            this.groupBox5.TabIndex = 17;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Уведомления";
             // 
-            // buttonStopJob
+            // textBoxNotificationName
             // 
-            this.buttonStopJob.Location = new System.Drawing.Point(504, 148);
-            this.buttonStopJob.Name = "buttonStopJob";
-            this.buttonStopJob.Size = new System.Drawing.Size(137, 38);
-            this.buttonStopJob.TabIndex = 4;
-            this.buttonStopJob.Text = "Остановить задание";
-            this.buttonStopJob.UseVisualStyleBackColor = true;
-            this.buttonStopJob.Click += new System.EventHandler(this.buttonStopJob_Click);
+            this.textBoxNotificationName.Location = new System.Drawing.Point(139, 26);
+            this.textBoxNotificationName.Name = "textBoxNotificationName";
+            this.textBoxNotificationName.Size = new System.Drawing.Size(113, 20);
+            this.textBoxNotificationName.TabIndex = 0;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 29);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(127, 13);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "Название уведомления";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 69);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(128, 13);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "Почта для уведомлений";
+            // 
+            // textBoxEmail
+            // 
+            this.textBoxEmail.Location = new System.Drawing.Point(140, 69);
+            this.textBoxEmail.Name = "textBoxEmail";
+            this.textBoxEmail.Size = new System.Drawing.Size(188, 20);
+            this.textBoxEmail.TabIndex = 3;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 106);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(89, 13);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "Имя получателя";
+            // 
+            // textBoxNameOperator
+            // 
+            this.textBoxNameOperator.Location = new System.Drawing.Point(140, 106);
+            this.textBoxNameOperator.Name = "textBoxNameOperator";
+            this.textBoxNameOperator.Size = new System.Drawing.Size(112, 20);
+            this.textBoxNameOperator.TabIndex = 5;
+            // 
+            // buttonSaveNotification
+            // 
+            this.buttonSaveNotification.Location = new System.Drawing.Point(137, 160);
+            this.buttonSaveNotification.Name = "buttonSaveNotification";
+            this.buttonSaveNotification.Size = new System.Drawing.Size(146, 23);
+            this.buttonSaveNotification.TabIndex = 6;
+            this.buttonSaveNotification.Text = "Сохранить уведомление";
+            this.buttonSaveNotification.UseVisualStyleBackColor = true;
+            this.buttonSaveNotification.Click += new System.EventHandler(this.buttonSaveNotification_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1111, 520);
+            this.ClientSize = new System.Drawing.Size(1137, 520);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -523,6 +607,8 @@ namespace databaseBackup
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -569,6 +655,14 @@ namespace databaseBackup
         private System.Windows.Forms.Button buttonDeleteTask;
         private System.Windows.Forms.Button buttonStartJob;
         private System.Windows.Forms.Button buttonStopJob;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button buttonSaveNotification;
+        private System.Windows.Forms.TextBox textBoxNameOperator;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textBoxEmail;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBoxNotificationName;
     }
 }
 

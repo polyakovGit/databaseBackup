@@ -40,6 +40,7 @@ namespace databaseBackup
             }
 
             Job job = new Job(dtb.srv.JobServer, JobName.Text);
+            job.EmailLevel = CompletionAction.Always;
             job.IsEnabled = true;
             job.Create();
             job.ApplyToTargetServer(dtb.serverName);
