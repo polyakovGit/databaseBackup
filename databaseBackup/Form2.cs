@@ -100,7 +100,7 @@ namespace databaseBackup
             string backupDirectory = dtb.srv.BackupDirectory;
             //полный бекап
             string finalCommand= dtb.FullBackup(comboBoxDataBases.Text, backupDirectory);
-            finalCommand += dtb.EmailAndFreeSpace(email)
+            finalCommand += dtb.EmailAndFreeSpace(email);
             jobStep.Command = finalCommand;
             jobStep.Create();
             jbs = new JobSchedule(job, JobName.Text);
