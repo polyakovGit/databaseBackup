@@ -40,7 +40,7 @@ namespace databaseBackup
                             $"EXEC sp_send_dbmail @profile_name = 'finalTest',"+
                             $"@recipients = '{email}',"+
                             $"@subject = 'Test message',"+
-                            $"@body = 'someText'",+
+                            $"@body = 'someText',"+
                             $"@query = 'SELECT distinct(volume_mount_point)," +
                             $"total_bytes / 1048576 as Size_in_MB," +
                             $"available_bytes / 1048576 as Free_in_MB," +
@@ -50,6 +50,7 @@ namespace databaseBackup
                             $"group by volume_mount_point, total_bytes / 1048576," +
                             $"available_bytes / 1048576 order by 1'," +
                             $"@attach_query_result_as_file = 1";
+            return sqlExpression;
             //USE msdb
             //GO
             //EXEC sp_send_dbmail @profile_name = 'finalTest',
