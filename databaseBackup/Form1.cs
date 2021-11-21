@@ -42,18 +42,25 @@ namespace databaseBackup
         }
         private void buttonConnect_Click(object sender, EventArgs e)
         {
-            string Server = comboBoxNameServer.Text;
-            dtb.serverName = Server;
-            if (comboBoxAuthentication.SelectedIndex == 0)
+            try
             {
-                dtb.srv = new Server(Server);
+                string Server = comboBoxNameServer.Text;
+                dtb.serverName = Server;
+                if (comboBoxAuthentication.SelectedIndex == 0)
+                {
+                    dtb.srv = new Server(Server);
+                }
+                else
+                {
+                    string NameUser = textBoxNameUser.Text;
+                    string Pass = textBoxPass.Text;
+                    dtb.srvConn = new ServerConnection(Server, NameUser, Pass);
+                    dtb.srv = new Server(dtb.srvConn);
+                }
             }
-            else
+            catch
             {
-                string NameUser = textBoxNameUser.Text;
-                string Pass = textBoxPass.Text;
-                dtb.srvConn = new ServerConnection(Server, NameUser, Pass);
-                dtb.srv = new Server(dtb.srvConn);
+                MessageBox.Show("Ошибка соединения");
             }
             MessageBox.Show("Соединение установлено");
             addAllDatabasesToLists();
@@ -72,7 +79,7 @@ namespace databaseBackup
                 bk.Database = comboBoxdataBasesforBackup.SelectedItem.ToString();
             bk.Incremental = false;
             if (checkBoxExpirationDate.Checked)
-                bk.ExpirationDate = monthCalendar1.SelectionStart;//проверить региональные настройки пользователя в ssms default language en
+                bk.ExpirationDate = monthCalendar1.SelectionStart;//ssms default language en 
             string path = string.Format($"{databaseName}_" +
                 $"{DateTime.Now.ToString("dd.MM.yyyy_HH-mm-ss")}" +
                 $".bak");

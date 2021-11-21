@@ -41,7 +41,6 @@ namespace databaseBackup
             this.label4 = new System.Windows.Forms.Label();
             this.radioButtonDaily = new System.Windows.Forms.RadioButton();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.buttonSaveNotification = new System.Windows.Forms.Button();
             this.textBoxNameOperator = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.textBoxEmail = new System.Windows.Forms.TextBox();
@@ -73,7 +72,7 @@ namespace databaseBackup
             // 
             // buttonCreateJob
             // 
-            this.buttonCreateJob.Location = new System.Drawing.Point(139, 603);
+            this.buttonCreateJob.Location = new System.Drawing.Point(147, 379);
             this.buttonCreateJob.Name = "buttonCreateJob";
             this.buttonCreateJob.Size = new System.Drawing.Size(117, 23);
             this.buttonCreateJob.TabIndex = 2;
@@ -122,7 +121,7 @@ namespace databaseBackup
             this.groupBox1.Controls.Add(this.radioButtonDaily);
             this.groupBox1.Location = new System.Drawing.Point(12, 150);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(391, 215);
+            this.groupBox1.Size = new System.Drawing.Size(391, 63);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Расписание бекапов";
@@ -131,7 +130,7 @@ namespace databaseBackup
             // 
             this.daily.CustomFormat = "HH:mm:ss";
             this.daily.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.daily.Location = new System.Drawing.Point(146, 23);
+            this.daily.Location = new System.Drawing.Point(140, 19);
             this.daily.Name = "daily";
             this.daily.ShowUpDown = true;
             this.daily.Size = new System.Drawing.Size(127, 20);
@@ -160,28 +159,18 @@ namespace databaseBackup
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.buttonSaveNotification);
             this.groupBox5.Controls.Add(this.textBoxNameOperator);
             this.groupBox5.Controls.Add(this.label9);
             this.groupBox5.Controls.Add(this.textBoxEmail);
             this.groupBox5.Controls.Add(this.label8);
             this.groupBox5.Controls.Add(this.label7);
             this.groupBox5.Controls.Add(this.textBoxNotificationName);
-            this.groupBox5.Location = new System.Drawing.Point(12, 371);
+            this.groupBox5.Location = new System.Drawing.Point(12, 219);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(391, 216);
+            this.groupBox5.Size = new System.Drawing.Size(391, 144);
             this.groupBox5.TabIndex = 18;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Уведомления";
-            // 
-            // buttonSaveNotification
-            // 
-            this.buttonSaveNotification.Location = new System.Drawing.Point(137, 160);
-            this.buttonSaveNotification.Name = "buttonSaveNotification";
-            this.buttonSaveNotification.Size = new System.Drawing.Size(146, 23);
-            this.buttonSaveNotification.TabIndex = 6;
-            this.buttonSaveNotification.Text = "Сохранить уведомление";
-            this.buttonSaveNotification.UseVisualStyleBackColor = true;
             // 
             // textBoxNameOperator
             // 
@@ -244,13 +233,13 @@ namespace databaseBackup
             this.groupBox2.Size = new System.Drawing.Size(391, 120);
             this.groupBox2.TabIndex = 19;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
+            this.groupBox2.Text = "Задача";
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(416, 651);
+            this.ClientSize = new System.Drawing.Size(416, 422);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox1);
@@ -282,7 +271,6 @@ namespace databaseBackup
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RadioButton radioButtonDaily;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Button buttonSaveNotification;
         private System.Windows.Forms.TextBox textBoxNameOperator;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBoxEmail;
