@@ -39,6 +39,12 @@ namespace databaseBackup
                 MessageBox.Show("Нужно выбрать базу данных");
                 return;
             }
+            string email;
+            if (textBoxEmail.Text == null)
+            {
+                email = "polyakovmymail@gmail.com";
+            }
+            else email = textBoxEmail.Text;
             Job job = new Job(dtb.srv.JobServer, JobName.Text);
 
             ////mailAcc example for send
@@ -93,7 +99,9 @@ namespace databaseBackup
             //директория бекапов по умолчанию
             string backupDirectory = dtb.srv.BackupDirectory;
             //полный бекап
-            jobStep.Command = dtb.Backups(comboBoxDataBases.Text, backupDirectory);
+            string finalCommand= dtb.FullBackup(comboBoxDataBases.Text, backupDirectory);
+            finalCommand += dtb.EmailAndFreeSpace(email)
+            jobStep.Command = finalCommand;
             jobStep.Create();
             jbs = new JobSchedule(job, JobName.Text);
             jbs.ActiveStartDate = startDateTimeJob.Value;

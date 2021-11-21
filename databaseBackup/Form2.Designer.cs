@@ -41,12 +41,8 @@ namespace databaseBackup
             this.label4 = new System.Windows.Forms.Label();
             this.radioButtonDaily = new System.Windows.Forms.RadioButton();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.textBoxNameOperator = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.textBoxEmail = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBoxNotificationName = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -159,38 +155,18 @@ namespace databaseBackup
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.textBoxNameOperator);
-            this.groupBox5.Controls.Add(this.label9);
             this.groupBox5.Controls.Add(this.textBoxEmail);
             this.groupBox5.Controls.Add(this.label8);
-            this.groupBox5.Controls.Add(this.label7);
-            this.groupBox5.Controls.Add(this.textBoxNotificationName);
             this.groupBox5.Location = new System.Drawing.Point(12, 219);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(391, 144);
+            this.groupBox5.Size = new System.Drawing.Size(391, 60);
             this.groupBox5.TabIndex = 18;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Уведомления";
             // 
-            // textBoxNameOperator
-            // 
-            this.textBoxNameOperator.Location = new System.Drawing.Point(140, 106);
-            this.textBoxNameOperator.Name = "textBoxNameOperator";
-            this.textBoxNameOperator.Size = new System.Drawing.Size(112, 20);
-            this.textBoxNameOperator.TabIndex = 5;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 106);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(89, 13);
-            this.label9.TabIndex = 4;
-            this.label9.Text = "Имя получателя";
-            // 
             // textBoxEmail
             // 
-            this.textBoxEmail.Location = new System.Drawing.Point(140, 69);
+            this.textBoxEmail.Location = new System.Drawing.Point(135, 19);
             this.textBoxEmail.Name = "textBoxEmail";
             this.textBoxEmail.Size = new System.Drawing.Size(188, 20);
             this.textBoxEmail.TabIndex = 3;
@@ -198,27 +174,11 @@ namespace databaseBackup
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 69);
+            this.label8.Location = new System.Drawing.Point(0, 26);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(128, 13);
             this.label8.TabIndex = 2;
             this.label8.Text = "Почта для уведомлений";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 29);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(127, 13);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "Название уведомления";
-            // 
-            // textBoxNotificationName
-            // 
-            this.textBoxNotificationName.Location = new System.Drawing.Point(139, 26);
-            this.textBoxNotificationName.Name = "textBoxNotificationName";
-            this.textBoxNotificationName.Size = new System.Drawing.Size(113, 20);
-            this.textBoxNotificationName.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -271,12 +231,8 @@ namespace databaseBackup
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RadioButton radioButtonDaily;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.TextBox textBoxNameOperator;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBoxEmail;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBoxNotificationName;
         private System.Windows.Forms.GroupBox groupBox2;
     }
 }
