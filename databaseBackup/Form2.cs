@@ -39,12 +39,17 @@ namespace databaseBackup
                 MessageBox.Show("Нужно выбрать базу данных");
                 return;
             }
-            string email;
+            string email, profile;
             if (textBoxEmail.Text == null)
             {
                 email = "polyakovmymail@gmail.com";
             }
             else email = textBoxEmail.Text;
+            if (textBoxProfile.Text == null)
+            {
+                profile = "polyakovmymail@gmail.com";
+            }
+            else profile = textBoxProfile.Text;
             Job job = new Job(dtb.srv.JobServer, JobName.Text);
 
             ////mailAcc example for send
@@ -56,7 +61,7 @@ namespace databaseBackup
             //ma = new MailAccount(sm, mailAccountUniqueName, "AdventureWorks2012 Automated Mailer",
             //                    "Mail account for administrative e-mail.", "dba@Adventure-Works.com");
             //ma.Create();
-            
+
             //string alertName,operatorName,operatorMail; //"textName"
 
             //if (textBoxNotificationName.Text == null)
@@ -99,8 +104,8 @@ namespace databaseBackup
             //директория бекапов по умолчанию
             string backupDirectory = dtb.srv.BackupDirectory;
             //полный бекап
-            string finalCommand= dtb.FullBackup(comboBoxDataBases.Text, backupDirectory);
-            finalCommand += dtb.EmailAndFreeSpace(email);
+            string finalCommand = dtb.FullBackup(comboBoxDataBases.Text, backupDirectory);
+            finalCommand += dtb.EmailAndFreeSpace(email, profile);//add query email
             jobStep.Command = finalCommand;
             jobStep.Create();
             jbs = new JobSchedule(job, JobName.Text);

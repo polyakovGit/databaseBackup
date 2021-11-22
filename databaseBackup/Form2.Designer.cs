@@ -44,6 +44,8 @@ namespace databaseBackup
             this.textBoxEmail = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textBoxProfile = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -52,7 +54,7 @@ namespace databaseBackup
             // comboBoxDataBases
             // 
             this.comboBoxDataBases.FormattingEnabled = true;
-            this.comboBoxDataBases.Location = new System.Drawing.Point(111, 13);
+            this.comboBoxDataBases.Location = new System.Drawing.Point(119, 19);
             this.comboBoxDataBases.Name = "comboBoxDataBases";
             this.comboBoxDataBases.Size = new System.Drawing.Size(133, 21);
             this.comboBoxDataBases.TabIndex = 0;
@@ -60,7 +62,7 @@ namespace databaseBackup
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 16);
+            this.label1.Location = new System.Drawing.Point(14, 27);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(74, 13);
             this.label1.TabIndex = 1;
@@ -78,7 +80,7 @@ namespace databaseBackup
             // 
             // JobName
             // 
-            this.JobName.Location = new System.Drawing.Point(114, 47);
+            this.JobName.Location = new System.Drawing.Point(122, 53);
             this.JobName.Name = "JobName";
             this.JobName.Size = new System.Drawing.Size(130, 20);
             this.JobName.TabIndex = 3;
@@ -86,7 +88,7 @@ namespace databaseBackup
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 47);
+            this.label2.Location = new System.Drawing.Point(14, 60);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(102, 13);
             this.label2.TabIndex = 4;
@@ -95,7 +97,7 @@ namespace databaseBackup
             // startDateTimeJob
             // 
             this.startDateTimeJob.CustomFormat = "";
-            this.startDateTimeJob.Location = new System.Drawing.Point(111, 75);
+            this.startDateTimeJob.Location = new System.Drawing.Point(119, 81);
             this.startDateTimeJob.MinDate = new System.DateTime(2021, 10, 13, 0, 0, 0, 0);
             this.startDateTimeJob.Name = "startDateTimeJob";
             this.startDateTimeJob.Size = new System.Drawing.Size(133, 20);
@@ -104,7 +106,7 @@ namespace databaseBackup
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 81);
+            this.label3.Location = new System.Drawing.Point(14, 87);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 13);
             this.label3.TabIndex = 6;
@@ -155,18 +157,20 @@ namespace databaseBackup
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.label5);
+            this.groupBox5.Controls.Add(this.textBoxProfile);
             this.groupBox5.Controls.Add(this.textBoxEmail);
             this.groupBox5.Controls.Add(this.label8);
             this.groupBox5.Location = new System.Drawing.Point(12, 219);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(391, 60);
+            this.groupBox5.Size = new System.Drawing.Size(391, 100);
             this.groupBox5.TabIndex = 18;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Уведомления";
             // 
             // textBoxEmail
             // 
-            this.textBoxEmail.Location = new System.Drawing.Point(135, 19);
+            this.textBoxEmail.Location = new System.Drawing.Point(151, 19);
             this.textBoxEmail.Name = "textBoxEmail";
             this.textBoxEmail.Size = new System.Drawing.Size(188, 20);
             this.textBoxEmail.TabIndex = 3;
@@ -194,6 +198,22 @@ namespace databaseBackup
             this.groupBox2.TabIndex = 19;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Задача";
+            // 
+            // textBoxProfile
+            // 
+            this.textBoxProfile.Location = new System.Drawing.Point(151, 49);
+            this.textBoxProfile.Name = "textBoxProfile";
+            this.textBoxProfile.Size = new System.Drawing.Size(188, 20);
+            this.textBoxProfile.TabIndex = 4;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(0, 52);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(144, 13);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "Профиль для уведомлений";
             // 
             // Form2
             // 
@@ -234,5 +254,7 @@ namespace databaseBackup
         private System.Windows.Forms.TextBox textBoxEmail;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBoxProfile;
     }
 }

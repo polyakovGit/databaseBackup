@@ -33,11 +33,11 @@ namespace databaseBackup
                                    $"WITH FORMAT, NAME = N'{fileName} Database Full Backup'"; //Проверка на наличие объекта
             return sqlExpression;
         }
-        public string EmailAndFreeSpace(string email)
+        public string EmailAndFreeSpace(string email, string profile)
         {
             string sqlExpression= $"USE msdb"+
                             $"GO"+
-                            $"EXEC sp_send_dbmail @profile_name = 'finalTest',"+
+                            $"EXEC sp_send_dbmail @profile_name = '{profile}',"+
                             $"@recipients = '{email}',"+
                             $"@subject = 'Test message',"+
                             $"@body = 'someText',"+
