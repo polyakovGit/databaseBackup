@@ -42,6 +42,10 @@ namespace databaseBackup
             this.comboBoxAuthentication = new System.Windows.Forms.ComboBox();
             this.comboBoxNameServer = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.radioButtonFullBackup = new System.Windows.Forms.RadioButton();
+            this.radioButtonLogBackup = new System.Windows.Forms.RadioButton();
+            this.radioButtonDiffBackup = new System.Windows.Forms.RadioButton();
             this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.textBoxNameBase = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -70,6 +74,7 @@ namespace databaseBackup
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -184,7 +189,7 @@ namespace databaseBackup
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(322, 186);
+            this.groupBox1.Size = new System.Drawing.Size(322, 204);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Параметры подключения";
@@ -225,6 +230,7 @@ namespace databaseBackup
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.groupBox5);
             this.groupBox2.Controls.Add(this.monthCalendar1);
             this.groupBox2.Controls.Add(this.textBoxNameBase);
             this.groupBox2.Controls.Add(this.label3);
@@ -234,18 +240,62 @@ namespace databaseBackup
             this.groupBox2.Controls.Add(this.comboBoxdataBasesforBackup);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox2.ForeColor = System.Drawing.Color.Green;
-            this.groupBox2.Location = new System.Drawing.Point(342, 24);
+            this.groupBox2.Location = new System.Drawing.Point(17, 277);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(456, 212);
+            this.groupBox2.Size = new System.Drawing.Size(701, 212);
             this.groupBox2.TabIndex = 12;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Резервное копирование";
             // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.radioButtonFullBackup);
+            this.groupBox5.Controls.Add(this.radioButtonLogBackup);
+            this.groupBox5.Controls.Add(this.radioButtonDiffBackup);
+            this.groupBox5.Location = new System.Drawing.Point(262, 38);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(200, 162);
+            this.groupBox5.TabIndex = 23;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Тип резервного копирования";
+            // 
+            // radioButtonFullBackup
+            // 
+            this.radioButtonFullBackup.AutoSize = true;
+            this.radioButtonFullBackup.Checked = true;
+            this.radioButtonFullBackup.Location = new System.Drawing.Point(38, 27);
+            this.radioButtonFullBackup.Name = "radioButtonFullBackup";
+            this.radioButtonFullBackup.Size = new System.Drawing.Size(63, 17);
+            this.radioButtonFullBackup.TabIndex = 20;
+            this.radioButtonFullBackup.TabStop = true;
+            this.radioButtonFullBackup.Text = "Полное";
+            this.radioButtonFullBackup.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonLogBackup
+            // 
+            this.radioButtonLogBackup.AutoSize = true;
+            this.radioButtonLogBackup.Location = new System.Drawing.Point(38, 112);
+            this.radioButtonLogBackup.Name = "radioButtonLogBackup";
+            this.radioButtonLogBackup.Size = new System.Drawing.Size(127, 17);
+            this.radioButtonLogBackup.TabIndex = 22;
+            this.radioButtonLogBackup.Text = "Журнал транзакции";
+            this.radioButtonLogBackup.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonDiffBackup
+            // 
+            this.radioButtonDiffBackup.AutoSize = true;
+            this.radioButtonDiffBackup.Location = new System.Drawing.Point(37, 65);
+            this.radioButtonDiffBackup.Name = "radioButtonDiffBackup";
+            this.radioButtonDiffBackup.Size = new System.Drawing.Size(128, 17);
+            this.radioButtonDiffBackup.TabIndex = 21;
+            this.radioButtonDiffBackup.Text = "Дифференциальное";
+            this.radioButtonDiffBackup.UseVisualStyleBackColor = true;
+            // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(247, 38);
+            this.monthCalendar1.Location = new System.Drawing.Point(499, 38);
             this.monthCalendar1.MaxSelectionCount = 1;
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 17;
@@ -282,7 +332,7 @@ namespace databaseBackup
             // checkBoxExpirationDate
             // 
             this.checkBoxExpirationDate.AutoSize = true;
-            this.checkBoxExpirationDate.Location = new System.Drawing.Point(247, 16);
+            this.checkBoxExpirationDate.Location = new System.Drawing.Point(499, 16);
             this.checkBoxExpirationDate.Name = "checkBoxExpirationDate";
             this.checkBoxExpirationDate.Size = new System.Drawing.Size(100, 17);
             this.checkBoxExpirationDate.TabIndex = 19;
@@ -311,11 +361,11 @@ namespace databaseBackup
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox3.ForeColor = System.Drawing.Color.Green;
-            this.groupBox3.Location = new System.Drawing.Point(814, 28);
+            this.groupBox3.Location = new System.Drawing.Point(737, 277);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(295, 208);
+            this.groupBox3.Size = new System.Drawing.Size(295, 212);
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Восстановление базы данных";
@@ -418,11 +468,11 @@ namespace databaseBackup
             this.groupBox4.Controls.Add(this.buttonDeleteTask);
             this.groupBox4.Controls.Add(this.buttonNewTask);
             this.groupBox4.Controls.Add(this.dataGridView1);
-            this.groupBox4.Location = new System.Drawing.Point(18, 258);
+            this.groupBox4.Location = new System.Drawing.Point(347, 50);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox4.Size = new System.Drawing.Size(685, 219);
+            this.groupBox4.Size = new System.Drawing.Size(685, 204);
             this.groupBox4.TabIndex = 16;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Расписание копирования";
@@ -505,7 +555,7 @@ namespace databaseBackup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1137, 520);
+            this.ClientSize = new System.Drawing.Size(1052, 520);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -519,6 +569,8 @@ namespace databaseBackup
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -569,6 +621,10 @@ namespace databaseBackup
         private System.Windows.Forms.Button buttonDeleteTask;
         private System.Windows.Forms.Button buttonStartJob;
         private System.Windows.Forms.Button buttonStopJob;
+        private System.Windows.Forms.RadioButton radioButtonLogBackup;
+        private System.Windows.Forms.RadioButton radioButtonDiffBackup;
+        private System.Windows.Forms.RadioButton radioButtonFullBackup;
+        private System.Windows.Forms.GroupBox groupBox5;
     }
 }
 

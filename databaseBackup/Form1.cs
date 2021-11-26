@@ -72,13 +72,26 @@ namespace databaseBackup
         {
             string databaseName = textBoxNameBase.Text;
             var bk = new Backup();
-            bk.Action = BackupActionType.Database;
-            //bkp.Action = BackupActionType.Log//log backup//bk.LogTruncation = BackupTruncateLogType.Truncate;
-
+            if (radioButtonFullBackup.Checked) { 
+                bk.Action = BackupActionType.Database;
+                bk.BackupSetDescription = "Full backup testdb";
+                bk.BackupSetName = "full backup";
+            }
+            if (radioButtonDiffBackup.Checked)
+            {
+                bk.Action = BackupActionType.Database;
+                bk.Incremental = true;//diff backup
+                bk.BackupSetDescription = "Diff backup testdb";
+                bk.BackupSetName = "diff backup";
+            }
+            if (radioButtonLogBackup.Checked)
+            {
+                bk.Action = BackupActionType.Log;//log backup
+                bk.BackupSetDescription = "Log backup testdb";
+                bk.BackupSetName = "log backup";
+                //bk.LogTruncation = BackupTruncateLogType.Truncate;
+            }
             //bk.CompressionOption = BackupCompressionOptions.On;//compression
-            //bk.Incremental = true;//diff backup
-            bk.BackupSetDescription = "Full backup testdb";
-            bk.BackupSetName = "full backup";
             if (comboBoxdataBasesforBackup.SelectedItem != null)
                 bk.Database = comboBoxdataBasesforBackup.SelectedItem.ToString();
             bk.Incremental = false;
@@ -221,6 +234,7 @@ namespace databaseBackup
             job.Refresh();
             RefreshJobs();
         }
+
 
         //для ручного бекапа 
         //public async Task SendMessage(string toEmail, string title, string message)
