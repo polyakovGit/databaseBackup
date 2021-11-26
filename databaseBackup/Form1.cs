@@ -73,6 +73,10 @@ namespace databaseBackup
             string databaseName = textBoxNameBase.Text;
             var bk = new Backup();
             bk.Action = BackupActionType.Database;
+            //bkp.Action = BackupActionType.Log//log backup//bk.LogTruncation = BackupTruncateLogType.Truncate;
+
+            //bk.CompressionOption = BackupCompressionOptions.On;//compression
+            //bk.Incremental = true;//diff backup
             bk.BackupSetDescription = "Full backup testdb";
             bk.BackupSetName = "full backup";
             if (comboBoxdataBasesforBackup.SelectedItem != null)
